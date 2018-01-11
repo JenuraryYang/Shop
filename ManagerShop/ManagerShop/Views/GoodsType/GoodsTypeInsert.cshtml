@@ -1,0 +1,143 @@
+﻿@{
+    ViewBag.Title = "GoodsTypeInsert";
+    Layout = "~/Views/Master_Layout.cshtml";
+
+    List<CommodityTypeInfo> F_Select = ViewBag.F_Select as List<CommodityTypeInfo>;
+
+}
+@using ManagerShop;
+<form method="post" id="form1" action="~/GoodsType/GoodsTypeInsert_2">
+                    <div style="margin-left:250px;margin-top:100px">
+
+                     <div style="margin-left:30px">
+                         <input type="radio" id="F_Radio" name="radio" /><label for="F_Radio">&nbsp;父级元素</label>
+                         <input type="radio" id="S_Radio" name="radio" /><label for="S_Radio">&nbsp;子级元素</label>
+                     </div>
+                        <br />
+                            <div style="font-size:20px" >
+
+                                <span style="font-weight:bold" >类型名称：</span><input type="text" name="CTI_Name" id="name" placeholder="请输入新类型" />
+
+                            </div>
+                        <div style="margin-top:25px;font-size:15px;display:none" id="divSelect">
+                            <span>请选择父级元素：</span><select id="F_Select" name="CTI_ID" style="width:120px">
+                                <option value="0">请选择父级元素</option>
+                                @{
+                                  
+                                    foreach (var item in F_Select)
+                                    {
+                                    <option value="@item.CTI_ID">@item.CTI_Name</option>
+                                    }
+                                      
+                                  }
+
+
+                                                 </select>
+                        </div>
+                             <p style="padding-top:30px;padding-left:50px">
+                                <button class="btn btn-default btn-rounded" id="insert" type="submit">新增</button>
+                                <a class="btn btn-primary btn-rounded" style="margin-left:100px" href="~/GoodsType/GoodsTypeInsert">取消</a>     
+                            </p>
+                          
+
+                       @*   <div style="display:normal">
+
+                            <span>父级元素：</span><select id="F_select">
+                                <option></option>
+                                              </select>
+
+                        </div>*@
+                        </div>
+    </form>
+<script src="~/js/jquery-1.9.1.min.js"></script>
+<script>
+
+    $(function () {
+
+        $("#S_Radio").click(function () {
+
+            if (this.checked) {
+                
+                $("#divSelect").show();
+                $("#form1").submit("");
+            }
+        })
+
+        $("#F_Radio").click(function () {
+
+            if (this.checked) {
+
+                $("#divSelect").hide();
+            }
+        })
+
+        $("#name").blur(function () {
+            var count = 0;
+            
+            $("input[type='radio']").each(function (index,item) {
+                if ($("input[type='radio']")[index].checked)
+                {
+                    count++;
+                }
+            })
+            
+            if (count == 0)
+            {
+                alert("请选择您要添加新类型的类型");
+                location.href = "/GoodsType/GoodsTypeInsert";
+            }
+        })
+    })
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

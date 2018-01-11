@@ -1,0 +1,441 @@
+﻿@{
+    ViewBag.Title = "OrderDetailInfo";
+    Layout = "~/Views/Master_Layout.cshtml";
+
+    List<string> Ulist = ViewBag.Ulist as List<string>;
+
+    OrderUser OneUser = ViewBag.OneUser as OrderUser;
+    List<ManagerShop.Express> Elist = ViewBag.Elist as List<ManagerShop.Express>;
+    
+    
+}
+@using ManagerShop.dto
+
+@model List<OrderGoods>
+
+<script src="~/js/jquery-1.9.1.min.js"></script>
+<script src="~/js/jquery.imagezoom.js"></script>
+<style>
+
+    html{overflow-y:scroll;}
+			body{margin:0; font:12px "\5B8B\4F53",san-serif;background:#ffffff;}
+			div,ul,li{padding:0; margin:0;}
+			li{list-style-type:none;}
+			img{vertical-align:top;border:0;}
+			
+			/* box */
+			.box{width:610px;margin:100px auto;}
+			.tb-pic a{display:table-cell;text-align:center;vertical-align:middle;}
+			.tb-pic a img{vertical-align:middle;}
+			.tb-pic a{*display:block;*font-family:Arial;*line-height:1;}
+			.tb-thumb{margin:10px 0 0;overflow:hidden;}
+			.tb-thumb li{background:none repeat scroll 0 0 transparent;float:left;height:42px;margin:0 6px 0 0;overflow:hidden;padding:1px;}
+			.tb-s310, .tb-s310 a{height:80px;width:80px;}
+			.tb-s310, .tb-s310 img{max-height:200px;max-width:200px;}
+			.tb-s310 a{*font-size:271px;}
+			.tb-s40 a{*font-size:35px;}
+			.tb-s40, .tb-s40 a{height:40px;width:40px;}
+			.tb-booth{border:1px solid #CDCDCD;position:relative;z-index:1;}
+			.tb-thumb .tb-selected{background:none repeat scroll 0 0 #C30008;height:40px;padding:2px;}
+			.tb-thumb .tb-selected div{background-color:#FFFFFF;border:medium none;}
+			.tb-thumb li div{border:1px solid #CDCDCD;}
+			.zoomDiv{z-index:999;position:absolute;top:0px;left:0px;width:500px;height:500px;background:#ffffff;border:1px solid #CCCCCC;display:none;text-align:center;overflow:hidden;}
+			.zoomMask{position:absolute;background:url("images/mask.png") repeat scroll 0 0 transparent;cursor:move;z-index:1;}
+               .cur {
+    
+        border:1px;
+        background-color:#e5d6d6;
+        opacity:0.8;
+        color:blue;
+        border:1px solid gray;
+         
+    }
+
+</style>
+
+
+<div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>订单详情信洗查询 </h5>
+                </div>
+                <div class="ibox-content">
+
+                 收件人：   <select style="width:120px;height:30px;font-size:15px" id="IsState">
+                     <option>----收件人----</option>
+                        @{
+                            foreach (var item in Ulist)
+                            {
+                                <option value="@item">@item</option>
+                            }
+                         }
+                    </select>
+                    <table class="table table-striped table-bordered table-hover dataTables-example dataTable" border="1" style="width:1075px">
+
+
+                        <tr >
+                            <td>收件人：@OneUser.GetName</td>
+                            <td>联系电话：@OneUser.Phone</td>
+                            <td>收货地址：@OneUser.Address<br />@OneUser.DetaileAddress</td>
+                        </tr>
+
+                    </table>
+                    <table style="margin-top:-15px" class="table table-striped table-bordered table-hover dataTables-example dataTable" id="DataTables_Table_0" aria-describedby="DataTables_Table_0_info">
+                        <thead>
+                        <tr role="row">
+                            <th style="width:80px;padding-top:3px"><label for="full"><input type="checkbox" style="opacity:0.6;width:15px;height:15px" id="full" /><span style="position:absolute;margin-left:5px;margin-top:3px">全 选</span></label></th>
+                            <th  tabindex="0"   style="width: 120px;background:white">商品原图</th>
+                            <th tabindex="0"    style="width: 292px;background:white">商品名称</th>
+                            <th  tabindex="0"   style="width: 119px;background:white">商品类型</th>
+                            <th  tabindex="0"   style="width: 120px;background:white">商品数量</th>
+                            <th  tabindex="0"  style="width: 120px;background:white">商品价格</th>
+                            <th  tabindex="0"  style="width: 120px;background:white">购买状态</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                            @{
+                                foreach (var item in Model)
+                                {
+                                      <tr class="gradeA odd">
+                                     <td id="@item.OrderID"><input type="checkbox"  style="opacity:0.6;width:15px;height:15px" /></td>
+                                    <td class=""><div class="tb-booth tb-pic tb-s310"><img src="~/Needs/img/@item.GoodsImage" alt="放大镜展示" rel="~/Needs/img/@item.GoodsImage" style="max-width:80px" class="jqzoom" /></div></td>
+                                    <td class=" ">@item.GoodsName</td>
+                                     <td class="center ">@item.TypeName</td>
+                                    <td class="sorting_1">@item.BuyNumber</td>
+                                    <td class="center ">@Convert.ToInt32(item.BuyNumber*@Convert.ToInt32(item.Price))</td>
+                                           <td class="center ">
+                                             @if (item.IsState==0)
+                                             { 
+                                               @:待发货
+                                             }
+                                             else if (item.IsState == 1)
+                                             { 
+                                              @:待付款
+                                             }
+                                             else if (item.IsState == 2)
+                                             { 
+                                             @:待收货
+                                             }
+                                             else if (item.IsState == 3)
+                                             { 
+                                             @:待评价
+                                             }
+                                           </td>
+                                      </tr>
+                                }
+                             }
+                     
+                        <script>
+
+                            $(function () {
+
+                                $(".jqzoom").imagezoom();
+
+                            })
+
+                        </script>
+                       </tbody>                     
+                    </table>
+                    <div>
+
+                    @*<div>
+                        <a href="#" style="font-size:20px;color:red">选择快递公司</a><span style="font-size:10px">不选就默认</span>
+                    </div>*@
+                    <div style="margin-left:800px;">
+                       <a class="btn btn-success" id="decide">
+                        <i class="fa fa-pencil-square-o"> </i> 确认发单
+                    </a>
+                        <a class="btn btn-default " id="delete">
+                        <i class="fa fa-trash"> </i> 删除订单
+                    </a>
+                    </div>
+
+                    </div>
+                    
+
+                </div>
+            </div>
+        </div>
+
+<div hidden="hidden" id="express"  >
+
+    @{
+        foreach (var item in Elist)
+        {
+            <div style="text-align:center;float:left;margin-left:10px;width:205px;height:140px;" id="@item.Express_ID" class="div_click">
+                <div>
+                     <img src="~/Needs/@item.Express_Image" width="200" height="100" /> 
+                </div>
+             <div>
+                    <span style="border-bottom:1px solid black;font-weight:bolder;font-family:华康简综艺">@item.Express_Name</span>
+           </div>
+    </div>
+        }  
+      }
+
+   @* <div style="text-align:center;float:left"  class="div_click">
+         <div>
+             <img src="~/Needs/Express/shunfeng.jpg" width="200"  /> 
+         </div>
+        <div>
+            <span style="border-bottom:1px solid black;font-weight:bolder;font-family:华康简综艺">百世快递</span>
+        </div>
+    </div>
+    <div style="text-align:center;float:left"  class="div_click">
+         <div>
+             <img src="~/Needs/Express/shunfeng.jpg" width="200"  /> 
+         </div>
+        <div>
+            <span style="border-bottom:1px solid black;font-weight:bolder;font-family:华康简综艺;">百世快递</span>
+        </div>
+    </div>*@
+   <script>
+       $(function(){
+       
+           $(".div_click").click(function () {
+
+               $(this).siblings().removeClass("cur");
+               $(this).addClass("cur");
+
+           })
+
+       })
+
+   </script>
+</div>
+
+<script src="~/layer/layer.js"></script>
+
+
+<script>
+
+                  $(function () {
+
+                      //设置全选功能()
+                      $("thead").find("input[type='checkbox']").click(function () {
+
+                          if (this.checked) {
+                              $("tbody").find("input[type='checkbox']").each(function (index, item) {
+
+                                  item.checked = true;
+                              });
+                          }
+                          else {
+                              $("tbody").find("input[type='checkbox']").each(function (index, item) {
+                                  item.checked = false;
+                              });
+                          }
+                      })
+
+                      //当子复选框全部选中时，自动选中父级复选框
+                      $("tbody").find("input[type='checkbox']").click(function () {
+
+                          var td = $("tbody").find("input[type='checkbox']");
+
+                          //单击之后去判断子击复选框是否都选中（作比对）
+                          //获取全部的子级复选框数量
+                          var son_num = td.length;
+                          //然后获取选中的数量
+                          var check_num = $("tbody").find("input[type='checkbox']:checked").length;
+                          if (check_num == son_num) {
+                              document.getElementById("full").checked = true;
+                          }
+                          else {
+
+                              document.getElementById("full").checked = false;
+
+                          }
+                      })
+                      
+
+                      //下拉框的改变事件
+                      $("#IsState").change(function () {
+
+                          var name=$(this).val();
+
+                          location.href = "/OrderForm/OrderDetailInfo?getname=" + name;
+                      })
+
+                      //点击发单
+                      $("#decide").click(function () {
+
+                          //判断是否选择复选框
+
+                          var check_box = $("tbody").find("input[type='checkbox']:checked");
+
+                          var number_check = check_box.length;
+                          //alert(number_check);
+                          if (number_check == 0)
+                          {
+                              layer.msg("您未选择待发单的订单，请选择！！");
+                              return;
+                          }
+                          //判断是否是未发单的订单
+
+                          //记录订单编号
+                          var orderid = "";
+                          var send_check = 0;
+                          check_box.each(function (index, item) {
+
+                              var needtr = $(item).parent().parent();
+
+                              //获取状态
+                              var status = needtr.find("td").eq(6).text();
+                             
+                              if (status.trim()!="待发货")
+                              {
+                                
+                                  send_check += 1;
+                                  
+                              }else
+                              {
+
+                                  var id=  $(item).parent().attr("id");
+                                  orderid+=id+",";
+                              }
+
+                          })
+                          //提交后台
+
+                          //处理Orderid 去掉最后面的‘，’
+
+                          //alert(orderid);
+
+                          //alert(orderid.lastIndexOf(","));
+
+                          
+                          if (send_check != 0) {
+                              layer.alert("订单的信息不匹配！");
+                          }
+                          else {
+
+                         
+                          var OrderId = orderid.substring(0, orderid.lastIndexOf(","));
+
+                          layer.confirm("是否选择快递公司？(是：选择，否：默认)", {
+                           
+                              btn: ["是", "否"]
+                          },
+                              function(){
+                                  layer.open({
+                                      title: "快递信息",
+                                      area:["700px","500px"],
+                                      content: $("#express").html(),
+                                      btn: ["确定", "取消"],
+                                      btn1: function () {
+
+                                          var express_id = "";
+
+                                          $(".div_click").each(function (index, item) {
+                                              if ($(item).hasClass("cur"))
+                                              {
+                                                  express_id= $(item).attr("id");
+                                              }
+                                          })
+
+                                          $.ajax({
+                                              type:"post",
+                                              url: "/OrderForm/Decise_Order",
+                                              data: "orderid=" + OrderId + "&express_id="+express_id,
+                                              success: function (result) {
+                                                  if (result != 0) {
+
+                                                      //修改内容
+                                                      $("tbody").find("input[type='checkbox']:checked").each(function (index, item) {
+
+                                                          $(item).parent().parent().find("td").eq(6).html("待收货");
+
+                                                      });
+                                                      layer.alert("发单成功");
+                                                  }
+                                                  else {
+                                                      layer.alert("发单失败");
+                                                  }
+
+                                              }
+
+                                              });
+
+                                      }
+                                  })
+                              },function(){
+                                  $.ajax({
+                                      type: "post",
+                                      url: "/OrderForm/Decise_Order",
+                                      data: "orderid=" + OrderId + "&express_id=null",
+                                      success: function (result) {
+                                          if (result != 0) {
+                                              //修改内容
+                                              $("tbody").find("input[type='checkbox']:checked").each(function (index, item) {
+
+                                                  $(item).parent().parent().find("td").eq(6).html("待收货");
+                                                  
+                                              });
+                                              layer.alert("发单成功");
+                                          }
+                                          else {
+                                              layer.alert("发单失败");
+                                          }
+
+                                      }
+
+                                  });
+                              }
+                              
+                          );
+                          
+                          }
+                      })
+
+                      //删除订单
+                      $("#delete").click(function () {
+
+                          //判断是否选择复选框
+
+                          var check_box = $("tbody").find("input[type='checkbox']:checked");
+
+                          var number_check = check_box.length;
+
+                          //
+
+                          //alert(number_check);
+                          if (number_check == 0) {
+                              layer.msg("您未选择待发单的订单，请选择！！");
+                              return;
+                          }
+                          else {
+                              var deleteid = "";
+                              //记录要删除的订单编号
+                              check_box.each(function (index, item) {
+
+                                  deleteid += $(item).parent().attr("id")+",";
+                              })
+
+                              var O_ID = deleteid.substring(0, deleteid.lastIndexOf(","));
+
+                              layer.alert("是否确认删除订单？", {
+                                  btn: ["确定", "取消"],
+                                  btn1: function () {
+
+                                      $.post("/OrderForm/Delete_Order", { orderid: O_ID }, function (result) {
+
+                                          if (result != 0) {
+
+                                              layer.msg("删除成功");
+                                              location.href = "/OrderForm/OrderDetailInfo";
+                                          }
+                                          else {
+                                              layer.msg("删除失败");
+                                          }
+
+                                      })
+
+                                  }
+                              })
+                          }
+                      })
+                      
+                  })
+
+              </script>

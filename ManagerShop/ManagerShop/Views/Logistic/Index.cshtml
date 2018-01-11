@@ -1,0 +1,64 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+@*<style>
+
+    .check {
+    
+        opacity:0.6;
+        color:green;
+        width:20px;
+        height:20px;
+    }
+
+</style>
+<input type="checkbox"  checked=""/>*@
+
+
+<style>
+
+    .cur {
+    
+        border:1px;
+        background-color:#e5d6d6;
+        opacity:0.8;
+        color:blue;
+         
+    }
+   
+
+</style>
+
+<div hidden="hidden">
+
+    <div style="text-align:center;float:left"  class="div_click">
+         <div>
+             <img src="~/Needs/Express/shunfeng.jpg" width="200"  /> 
+         </div>
+        <div>
+            <span style="border-bottom:1px solid black;font-weight:bolder;font-family:华康简综艺">百世快递</span>
+        </div>
+    </div>
+    <div style="text-align:center;float:left"  class="div_click">
+         <div>
+             <img src="~/Needs/Express/shunfeng.jpg" width="200"  /> 
+         </div>
+        <div>
+            <span style="border-bottom:1px solid black;font-weight:bolder;font-family:华康简综艺;">百世快递</span>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/jquery-1.9.1.min.js"></script>
+
+<script>
+     
+    $(".div_click").click(function () {
+
+        $(this).siblings().removeClass("cur");
+        $(this).addClass("cur");
+
+    })
+    
+</script>

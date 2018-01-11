@@ -1,0 +1,219 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="shopDBModelStoreContainer" CdmEntityContainer="shopDBEntities">
+    <EntitySetMapping Name="AdministratorInfo">
+      <EntityTypeMapping TypeName="shopDBModel.AdministratorInfo">
+        <MappingFragment StoreEntitySet="AdministratorInfo">
+          <ScalarProperty Name="AI_Date" ColumnName="AI_Date" />
+          <ScalarProperty Name="AI_Type" ColumnName="AI_Type" />
+          <ScalarProperty Name="AI_Balance" ColumnName="AI_Balance" />
+          <ScalarProperty Name="AI_Alipay" ColumnName="AI_Alipay" />
+          <ScalarProperty Name="AI_IDCard" ColumnName="AI_IDCard" />
+          <ScalarProperty Name="AI_Sex" ColumnName="AI_Sex" />
+          <ScalarProperty Name="AI_Name" ColumnName="AI_Name" />
+          <ScalarProperty Name="AI_LoginPwd" ColumnName="AI_LoginPwd" />
+          <ScalarProperty Name="AI_Num" ColumnName="AI_Num" />
+          <ScalarProperty Name="AI_HImage" ColumnName="AI_HImage" />
+          <ScalarProperty Name="AI_ID" ColumnName="AI_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ActivityInfo">
+      <EntityTypeMapping TypeName="shopDBModel.ActivityInfo">
+        <MappingFragment StoreEntitySet="ActivityInfo">
+          <ScalarProperty Name="AI_IS" ColumnName="AI_IS" />
+          <ScalarProperty Name="AI_Endtime" ColumnName="AI_Endtime" />
+          <ScalarProperty Name="AI_Starttime" ColumnName="AI_Starttime" />
+          <ScalarProperty Name="AI_Price" ColumnName="AI_Price" />
+          <ScalarProperty Name="AI_CI_ID" ColumnName="AI_CI_ID" />
+          <ScalarProperty Name="AI_ID" ColumnName="AI_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BuyerInfo">
+      <EntityTypeMapping TypeName="shopDBModel.BuyerInfo">
+        <MappingFragment StoreEntitySet="BuyerInfo">
+          <ScalarProperty Name="BI_SumScore" ColumnName="BI_SumScore" />
+          <ScalarProperty Name="BI_Date" ColumnName="BI_Date" />
+          <ScalarProperty Name="BI_Balance" ColumnName="BI_Balance" />
+          <ScalarProperty Name="BI_PayPwd" ColumnName="BI_PayPwd" />
+          <ScalarProperty Name="BI_Sex" ColumnName="BI_Sex" />
+          <ScalarProperty Name="BI_IDCared" ColumnName="BI_IDCared" />
+          <ScalarProperty Name="BI_Name" ColumnName="BI_Name" />
+          <ScalarProperty Name="BI_LoginPwd" ColumnName="BI_LoginPwd" />
+          <ScalarProperty Name="BI_NickName" ColumnName="BI_NickName" />
+          <ScalarProperty Name="BI_Phone" ColumnName="BI_Phone" />
+          <ScalarProperty Name="BI_HImage" ColumnName="BI_HImage" />
+          <ScalarProperty Name="BI_ID" ColumnName="BI_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CollectGoodsInfo">
+      <EntityTypeMapping TypeName="shopDBModel.CollectGoodsInfo">
+        <MappingFragment StoreEntitySet="CollectGoodsInfo">
+          <ScalarProperty Name="CGI_Time" ColumnName="CGI_Time" />
+          <ScalarProperty Name="CGI_BI_ID" ColumnName="CGI_BI_ID" />
+          <ScalarProperty Name="CGI_CI_ID" ColumnName="CGI_CI_ID" />
+          <ScalarProperty Name="CGI_ID" ColumnName="CGI_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CommodityInfo">
+      <EntityTypeMapping TypeName="shopDBModel.CommodityInfo">
+        <MappingFragment StoreEntitySet="CommodityInfo">
+          <ScalarProperty Name="CI_Sendgoods" ColumnName="CI_Sendgoods" />
+          <ScalarProperty Name="CI_Url" ColumnName="CI_Url" />
+          <ScalarProperty Name="CI_NowPrice" ColumnName="CI_NowPrice" />
+          <ScalarProperty Name="CI_Price" ColumnName="CI_Price" />
+          <ScalarProperty Name="CI_Discount" ColumnName="CI_Discount" />
+          <ScalarProperty Name="CI_SalesNum" ColumnName="CI_SalesNum" />
+          <ScalarProperty Name="CI_Num" ColumnName="CI_Num" />
+          <ScalarProperty Name="CI_Is" ColumnName="CI_Is" />
+          <ScalarProperty Name="CI_CreateDate" ColumnName="CI_CreateDate" />
+          <ScalarProperty Name="CI_Name" ColumnName="CI_Name" />
+          <ScalarProperty Name="CI_SI_ID" ColumnName="CI_SI_ID" />
+          <ScalarProperty Name="CI_CTI_ID" ColumnName="CI_CTI_ID" />
+          <ScalarProperty Name="CI_ID" ColumnName="CI_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CommodityTypeInfo">
+      <EntityTypeMapping TypeName="shopDBModel.CommodityTypeInfo">
+        <MappingFragment StoreEntitySet="CommodityTypeInfo">
+          <ScalarProperty Name="CTI_SaveUrl" ColumnName="CTI_SaveUrl" />
+          <ScalarProperty Name="CTI_Remark" ColumnName="CTI_Remark" />
+          <ScalarProperty Name="CTI_CTI_ID" ColumnName="CTI_CTI_ID" />
+          <ScalarProperty Name="CTI_Name" ColumnName="CTI_Name" />
+          <ScalarProperty Name="CTI_ID" ColumnName="CTI_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CouponInfo">
+      <EntityTypeMapping TypeName="shopDBModel.CouponInfo">
+        <MappingFragment StoreEntitySet="CouponInfo">
+          <ScalarProperty Name="CPI_IS" ColumnName="CPI_IS" />
+          <ScalarProperty Name="CPI_EndDate" ColumnName="CPI_EndDate" />
+          <ScalarProperty Name="CPI_BeginDate" ColumnName="CPI_BeginDate" />
+          <ScalarProperty Name="CPI_CI_ID" ColumnName="CPI_CI_ID" />
+          <ScalarProperty Name="CPI_CouponType" ColumnName="CPI_CouponType" />
+          <ScalarProperty Name="CPI_MinusMoney" ColumnName="CPI_MinusMoney" />
+          <ScalarProperty Name="CPI_MaxMoney" ColumnName="CPI_MaxMoney" />
+          <ScalarProperty Name="CPI_Type" ColumnName="CPI_Type" />
+          <ScalarProperty Name="CPI_ID" ColumnName="CPI_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FootprintInfo">
+      <EntityTypeMapping TypeName="shopDBModel.FootprintInfo">
+        <MappingFragment StoreEntitySet="FootprintInfo">
+          <ScalarProperty Name="FI_Date" ColumnName="FI_Date" />
+          <ScalarProperty Name="FI_CI_ID" ColumnName="FI_CI_ID" />
+          <ScalarProperty Name="FI_BI_ID" ColumnName="FI_BI_ID" />
+          <ScalarProperty Name="FI_ID" ColumnName="FI_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MyAddressInfo">
+      <EntityTypeMapping TypeName="shopDBModel.MyAddressInfo">
+        <MappingFragment StoreEntitySet="MyAddressInfo">
+          <ScalarProperty Name="MAI_Name" ColumnName="MAI_Name" />
+          <ScalarProperty Name="MAI_Remark" ColumnName="MAI_Remark" />
+          <ScalarProperty Name="MAI_IS" ColumnName="MAI_IS" />
+          <ScalarProperty Name="MAI_MinuteAddress" ColumnName="MAI_MinuteAddress" />
+          <ScalarProperty Name="MAI_Town" ColumnName="MAI_Town" />
+          <ScalarProperty Name="MAI_County" ColumnName="MAI_County" />
+          <ScalarProperty Name="MAI_City" ColumnName="MAI_City" />
+          <ScalarProperty Name="MAI_Province" ColumnName="MAI_Province" />
+          <ScalarProperty Name="MAI_Phone" ColumnName="MAI_Phone" />
+          <ScalarProperty Name="MAI_BI_ID" ColumnName="MAI_BI_ID" />
+          <ScalarProperty Name="MAI_Type" ColumnName="MAI_Type" />
+          <ScalarProperty Name="MAI_ID" ColumnName="MAI_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrderFormInfo">
+      <EntityTypeMapping TypeName="shopDBModel.OrderFormInfo">
+        <MappingFragment StoreEntitySet="OrderFormInfo">
+          <ScalarProperty Name="Express_ID" ColumnName="Express_ID" />
+          <ScalarProperty Name="OFI_Address" ColumnName="OFI_Address" />
+          <ScalarProperty Name="OFI_SAI_ID" ColumnName="OFI_SAI_ID" />
+          <ScalarProperty Name="OFI_CreateDate" ColumnName="OFI_CreateDate" />
+          <ScalarProperty Name="OFI_States" ColumnName="OFI_States" />
+          <ScalarProperty Name="OFI_Money" ColumnName="OFI_Money" />
+          <ScalarProperty Name="OFI_BI_ID" ColumnName="OFI_BI_ID" />
+          <ScalarProperty Name="OFI_Number" ColumnName="OFI_Number" />
+          <ScalarProperty Name="OFI_CI_ID" ColumnName="OFI_CI_ID" />
+          <ScalarProperty Name="OFI_ID" ColumnName="OFI_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReckoningInfo">
+      <EntityTypeMapping TypeName="shopDBModel.ReckoningInfo">
+        <MappingFragment StoreEntitySet="ReckoningInfo">
+          <ScalarProperty Name="RI_Remark" ColumnName="RI_Remark" />
+          <ScalarProperty Name="RI_TransactionDate" ColumnName="RI_TransactionDate" />
+          <ScalarProperty Name="RI_States" ColumnName="RI_States" />
+          <ScalarProperty Name="RI_Amount" ColumnName="RI_Amount" />
+          <ScalarProperty Name="RI_CPI_ID" ColumnName="RI_CPI_ID" />
+          <ScalarProperty Name="RI_CI_ID" ColumnName="RI_CI_ID" />
+          <ScalarProperty Name="RI_BI_ID" ColumnName="RI_BI_ID" />
+          <ScalarProperty Name="RI_ID" ColumnName="RI_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ShopCartInfo">
+      <EntityTypeMapping TypeName="shopDBModel.ShopCartInfo">
+        <MappingFragment StoreEntitySet="ShopCartInfo">
+          <ScalarProperty Name="SCI_Money" ColumnName="SCI_Money" />
+          <ScalarProperty Name="SCI_Caozuo" ColumnName="SCI_Caozuo" />
+          <ScalarProperty Name="SCI_Number" ColumnName="SCI_Number" />
+          <ScalarProperty Name="SCI_CI_ID" ColumnName="SCI_CI_ID" />
+          <ScalarProperty Name="SCI_BI_ID" ColumnName="SCI_BI_ID" />
+          <ScalarProperty Name="SCI_ID" ColumnName="SCI_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StoreInfo">
+      <EntityTypeMapping TypeName="shopDBModel.StoreInfo">
+        <MappingFragment StoreEntitySet="StoreInfo">
+          <ScalarProperty Name="SI_Remark" ColumnName="SI_Remark" />
+          <ScalarProperty Name="SI_CreateDate" ColumnName="SI_CreateDate" />
+          <ScalarProperty Name="SI_Intro" ColumnName="SI_Intro" />
+          <ScalarProperty Name="SI_Logo" ColumnName="SI_Logo" />
+          <ScalarProperty Name="SI_Name" ColumnName="SI_Name" />
+          <ScalarProperty Name="SI_STI_ID" ColumnName="SI_STI_ID" />
+          <ScalarProperty Name="SI_AI_ID" ColumnName="SI_AI_ID" />
+          <ScalarProperty Name="SI_ID" ColumnName="SI_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StoreTypeInfo">
+      <EntityTypeMapping TypeName="shopDBModel.StoreTypeInfo">
+        <MappingFragment StoreEntitySet="StoreTypeInfo">
+          <ScalarProperty Name="STI_Remark" ColumnName="STI_Remark" />
+          <ScalarProperty Name="STI_Name" ColumnName="STI_Name" />
+          <ScalarProperty Name="STI_ID" ColumnName="STI_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Express">
+      <EntityTypeMapping TypeName="shopDBModel.Express">
+        <MappingFragment StoreEntitySet="Express">
+          <ScalarProperty Name="Express_Desc" ColumnName="Express_Desc" />
+          <ScalarProperty Name="Express_Image" ColumnName="Express_Image" />
+          <ScalarProperty Name="Express_Expense" ColumnName="Express_Expense" />
+          <ScalarProperty Name="Express_Name" ColumnName="Express_Name" />
+          <ScalarProperty Name="Express_ID" ColumnName="Express_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Dic_OrderFormInfo_OFI_States1集">
+      <EntityTypeMapping TypeName="shopDBModel.Dic_OrderFormInfo_OFI_States1">
+        <MappingFragment StoreEntitySet="Dic_OrderFormInfo_OFI_States">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

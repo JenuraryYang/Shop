@@ -1,0 +1,236 @@
+﻿@{
+    ViewBag.Title = "Index_Information";
+
+    int? num = Model.AI_Type;
+    int? sex =Convert.ToInt32(Model.AI_Sex);
+}
+
+@using ManagerShop;
+@model AdministratorInfo
+
+<script src="~/js/jquery-1.9.1.min.js"></script>
+
+<style>
+
+    .tdiv {
+    
+        position:absolute;
+        top:50%;
+        left:50%;
+        transform:translate(-50%,-50%)
+        
+    
+    }
+
+    table {
+         width:400px;
+         /*border-top:1px solid yellow;
+        border-right:1px solid yellow;*/
+        height:500px;
+        background-color:white;
+        border-left:0px;
+        
+    
+    }
+        /*table tr {
+        
+            padding-top:30px
+        }*/
+        table tr td {
+
+       border-color:red;
+     
+        border-left:1px solid yellow;
+        border-bottom:1px solid yellow;
+
+            
+        }
+    .cur {
+    text-align:right
+    }
+
+    .head {
+    
+        opacity:0;
+        z-index:1;
+        position:absolute;
+        top:30%;
+        left:40%
+         
+    }
+    .changefile {
+background-color:#e2fed6;
+    position:absolute;
+     top:28%;
+        left:45%;
+        border-radius:8px;
+        height:40px
+    }
+    .update {
+        border:0px;
+    }
+
+</style>
+<html>
+
+    <body>
+        <form id="form1" action="/myself/index_Information"  method="post" enctype="multipart/form-data" >
+
+             <div class="tdiv" >
+           
+            <table >
+                 <tr>
+                    <td colspan="2" style="background-color:#7f859b;font-weight:700">个人信息</td>
+                  
+                </tr>
+                <tr>
+                    <td>头像：</td>
+                    <td>
+
+                       <div > <input type="file" name="AI_HImage" class="head" />
+
+                        <input type="button" class="changefile" value="更换头像" /></div>
+
+                        <div >
+                            <img src="~/Needs/@Session["url"]" id="image" style="width:120px;height:120px;margin-left:10px;border-radius:50%" />
+                        </div>
+                        </td>
+                </tr>
+                <tr>
+                    <td>账号：</td>
+                    <td><input type ="text" style="text-align:right;" readonly="readonly" value="@Model.AI_Num" name="AI_Num" class="update" placeholder ="未知" /></td>
+                </tr>
+                <tr>
+                    <td>姓名：</td>
+                    <td><input type ="text" style="text-align:right" readonly="readonly" value="@Model.AI_Name" name="AI_Name" class="update"  placeholder="未知" /></td>
+                    
+                </tr>
+                <tr>
+                    <td>性别：</td>
+                    <td id="sex">
+                        <label for="boy"><input type="radio" id="boy" name="AI_Sex" value="0" class="type" disabled="disabled"/>男士</label>
+                        <label for="girl"><input type="radio" id="girl" name="AI_Sex" value="1" class="type" disabled="disabled" />女士</label>
+                        <label for="secret"><input type="radio" id="secret" name="AI_Sex" value="2" class="type" disabled="disabled" />保密</label>
+                    </td>
+                    <script>
+
+                        $("#sex").find("input[type='radio']").each(function (index, item) {
+
+                            if(index==@sex)
+                            {
+                              $(item).attr("checked","checked");
+                        }
+
+                        })
+
+                    </script>
+                </tr>
+                <tr>
+                    <td>身份证号：</td>
+                    <td><input type ="text" style="text-align:right" readonly="readonly" value="@Model.AI_IDCard"  name="AI_IDCard" class="update" placeholder="未知" /></td>
+                </tr>
+                <tr>
+                    <td>支付宝账号：</td>
+                    <td><input type ="text" style="text-align:right" readonly="readonly" value="@Model.AI_Alipay" name="AI_Alipay" class="update" placeholder="未知" /></td>
+                </tr>
+                <tr>
+                    <td>账号类型：</td>
+                    <td id="type">
+                        <label for="0"><input type="radio" id="0" name="AI_Type" value="0"class="type" disabled="disabled"/>管理员</label>
+                        <label for="1"><input type="radio" id="1" name="AI_Type" value="1" class="type" disabled="disabled"/>店主</label>
+                        <label for="2"><input type="radio" id="2" name="AI_Type" value="2" class="type" disabled="disabled" />站内客户</label>
+                        <label for="3"><input type="radio" id="3" name="AI_Type" value="3"  class="type" disabled="disabled" />未知</label>
+                    </td>
+
+                    <script>
+
+                        $("#type").find("input[type='radio']").each(function (index, item) {
+
+                            if(index==@num)
+                            {
+                              $(item).attr("checked","checked");
+                            }
+
+                        })
+
+                    </script>
+                </tr>
+
+                <tr>
+                   <td colspan="2" style="text-align:center">
+                       <input type="button" style="border-radius:5px"  class="insert" value="录入详细信息" />  <input type="button" style="border-radius:5px" class="save" value="保存" />  <input type="button" class="return" style="border-radius:5px" value="返回首页" /> 
+                   </td>
+                </tr>
+            </table>
+            
+
+        </div>
+
+        </form>
+       
+
+    </body>
+
+</html>
+
+<script>
+
+
+    $(function () {
+    
+        $("table tr td").each(function (num, item) {
+
+            if (num % 2 == 0&&num!=0)
+            {
+                $(this).addClass("cur");
+            }
+
+            $("input[type='radio']").attr("check", "uncheck");
+        })
+
+        $(".head").change("click", function () {
+
+            var imgurl=$(this).val();
+
+            $("#form1").attr("action", "/myself/upload");
+
+            $("#form1").submit();
+        
+        })
+
+        $(".insert").click(function () {
+
+            $(".update").each(function (index, item) {
+
+                if (index > 0)
+                {
+                    $(item).removeClass("update");
+                    $(item).removeAttr("readonly");
+                }
+
+            })
+            $("input[type='radio']").each(function(index,item){
+            
+                $(item).removeAttr("disabled");
+
+            })
+
+        })
+
+        $(".save").click(function () {
+
+            $("#form1").attr("action", "/myself/SaveInfo");
+
+            $("#form1").submit();
+
+        })
+
+        $(".return").click(function(){
+        
+            location.href="/Mindex/index_1";
+
+        })
+
+    })
+
+</script>

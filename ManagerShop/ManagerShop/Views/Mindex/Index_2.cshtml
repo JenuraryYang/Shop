@@ -1,0 +1,127 @@
+﻿@{
+    ViewBag.Title = "Index_2";
+    Layout = "~/Views/Master_Layout.cshtml";
+    List<CommodityTypeInfo> CtList = ViewData["CtList"] as List<CommodityTypeInfo>;
+    List<StoreInfo> STlist = ViewData["Slist"] as List<StoreInfo>;
+    
+}
+@using ManagerShop
+
+
+<style>
+
+    table tr {
+    
+     padding-top:2em;
+    
+    }
+
+</style>
+
+<div style="margin-left:10px;margin-top:20px;font-weight:bold" >
+
+    <div class="alert alert-success" id="examplebtTableEventsResult" role="alert">
+     录入新的商品信息
+     </div>
+      <div id="divF"  style="margin-top:20px;margin-left:10px" >
+
+                           <form method="post" class="formFlush" enctype="multipart/form-data" action="~/Mindex/Index_2_Insert">
+
+
+                               <table style="font-size:20px;width:1000px;">
+
+                                  <tbody><tr> 
+                                      <td>
+                                          商品类型： <select  name="CI_CTI_ID" id="goodstype" style="width:150px;height:30px">
+                                     @{
+                                         foreach (var item in CtList)
+                                         {
+                                       <option value="@item.CTI_ID">@item.CTI_Name</option>       
+                                         } 
+                                        }
+                                </select>
+                                          </td>
+                                      <td style="margin-left:20px">
+                                             <img alt="image" id="img" src="~/Needs/img/IMG/default.png" width="100" height="120" /> 
+                                             <label title="上传图片" for="inputImage" class="btn btn-primary" style="margin-left:20px">
+                                             <input type="file" accept="~/Needs/GoodsPicture" name="file" id="inputImage" class="hide"> 上传新图片
+                                             </label>
+                                          </td>
+                                      </tr>
+                                      <tr>
+                                          <td>
+                                                商品名称：<input type="text" name="CI_Name" id="goods" />
+                                          </td><td>
+                                            商品折扣：<input type="text" name="CI_Discount"  id="discount"   />
+                                              
+                                               </td>
+                                          
+                                      </tr>
+                                      <tr><td>
+                                          &nbsp;
+                                          </td>
+                                          <td>&nbsp;</td>
+                                      </tr>
+                                     
+                                      <tr><td>
+                                                 是否上架： &nbsp;<input type="radio" value="0" id="0" name="CI_Is" checked="checked" /><label for="0">&nbsp;&nbsp;否&nbsp;</label><input type="radio" name="CI_Is" value="1" id="1" /><label for="1">&nbsp;&nbsp;是</label>
+                                          </td><td>
+                                          创建时间：<input type="datetime"  name="CI_CreateDate" readonly="true" id="time" value="@DateTime.Now"   />
+                                               <br />
+                                          </td>
+                                         
+                                      </tr>
+                                      <tr>
+                                          <td>&nbsp;</td>
+                                          <td>&nbsp;</td>
+                                      </tr>
+                                      <tr style="padding-top:2em"><td>
+                                               商品原价： <input type="text" name="CI_Price" id="price"  />
+                                          </td><td>
+                                              现库存量：<input type="text" id="number" name="CI_Num"  />
+                                          </td>
+                                      </tr>
+                                     
+                                      <tr>
+                                          <td style="padding-top:30px">
+                                              店铺名称：<select name="CI_SI_ID" style="height:30px">
+                                                  @{
+                                                      foreach (var item in STlist)
+                                                      {
+                                                          <option value="@item.SI_ID">@item.SI_Name</option>
+                                                      }
+                                                      }
+                                                   </select>
+                                          </td>
+                                          <td colspan="2" style="padding-top:30px;padding-left:100px">
+                                              <button class="btn btn-primary " type="submit"><i class="fa fa-check"></i>&nbsp;提交</button>
+                                              <a class="btn btn-success " href="~/Mindex/Index_2" type="button"><i class="fa fa-upload"></i>&nbsp;&nbsp;<span class="bold">取消</span>
+                                              </a>
+                                          </td>
+                                      </tr>
+                                  </tbody>
+
+                               </table>
+                           </form>
+                        </div>
+</div>
+
+<script src="~/js/jquery-1.9.1.min.js"></script>
+<script>
+
+    $(function () {
+
+        $("#inputImage").change("click", function () {
+
+           var url=  $(this).val();
+
+           var goodsimg = url.substring(url.lastIndexOf("\\")+1);
+            
+           $("#img").attr("src", "/Needs/img/IMG/" + goodsimg);
+
+        })
+
+
+    })
+
+</script>

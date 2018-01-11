@@ -1,0 +1,418 @@
+﻿@{
+    ViewBag.Title = "OrderFormInfo";
+    Layout = "~/Views/Master_Layout.cshtml";
+}
+
+@using ManagerShop.dto
+@model List<OrderInfo>
+ <link rel="shortcut icon" href="~/Needs/favicon.ico"> <link href="~/Needs/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="~/Needs/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="~/Needs/css/plugins/footable/footable.core.css" rel="stylesheet">
+
+    <link href="~/Needs/css/animate.min.css" rel="stylesheet">
+    <link href="~/Needs/css/style.min862f.css?v=4.1.0" rel="stylesheet">
+<script src="~/Needs/js/plugins/layer/layer.min.js"></script>
+<div class="col-sm-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>订单列表信息</h5>
+                        </div>
+                      
+                        <div class="ibox-content">
+
+                            <div class="row">
+                        <div class="col-sm-5 m-b-xs">
+                            <select class="input-sm form-control input-s-sm inline" id="IsState" style="width:120px">
+                               <option value="no">订单状态</option>
+                                <option value="0">待发货</option>
+                                <option value="1">待付款</option>
+                                <option value="2">待收货</option>
+                                <option value="3">待评论</option>
+                            </select>
+                        </div>
+                       
+                        <div class="col-sm-3" style="margin-left:-200px">
+                            <div class="input-group">
+                                <input type="text" placeholder="收件人\电话" id="condition" class="input-sm form-control">
+                                <span class="input-group-btn">
+                                        <button type="button" id="soso" class="btn btn-sm btn-primary"> 搜索</button> </span>
+                            </div>
+                        </div>
+                    </div>
+
+                            <table class="footable table table-stripped toggle-arrow-tiny footable-loaded tablet breakpoint" style="text-align:left" data-page-size="8">
+                                <thead>
+                                <tr>
+
+                                    <th data-toggle="true" class="footable-visible footable-sortable footable-sorted footable-first-column">订单编号</th>
+                                    <th class="footable-visible footable-sortable">收件人</th>
+                                    <th class="footable-visible footable-sortable">预留电话</th>
+                                    <th class="footable-visible footable-sortable">数量</th>
+                                    <th data-hide="all" class="footable-sortable" >订单金额</th>
+                                    <th data-hide="all" class="footable-sortable">订单状态</th>
+                                    <th data-hide="all" class="footable-sortable" >收件人地址</th>
+                                    <th class="footable-visible footable-sortable footable-last-column" style="padding-left:20px">操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                    @{
+                                        foreach (var item in Model)
+                                        {
+                                            <tr>
+                                               
+                                                <td class="order_Update">@item.OFI_ID</td>
+                                               <td class="order_Update">@item.GetName</td>
+                                                <td class="order_Update">@item.Phone</td>
+                                                <td class="order_Update">@item.OFI_Number</td>
+                                                <td class="order_Update">@Convert.ToInt32(item.OFI_Number * Convert.ToInt32(item.NowPrice))</td>
+                                                <td class="order_Update" IsState="@item.IsState">     @{
+                                            if (item.IsState == 0)
+                                            { 
+                                             @:待发货
+                                            }
+                                            if (item.IsState == 1)
+                                            { 
+                                             @:待付款
+                                            }
+                                            if (item.IsState == 2)
+                                            { 
+                                             @:待收货
+                                            }
+                                            if (item.IsState == 3)
+                                            { 
+                                             @:待评论
+                                            }
+                                                    }</td>
+                                                <td class="order_Update">@item.FullAddress</td>
+                                                <td><button type="button" id="update" class="btn btn-outline btn-success">修改</button><button type="button" class="btn btn-outline btn-primary">删除</button></td>
+                                            </tr>
+               
+                                        }
+                                        }
+
+                                </tbody>
+                            </table>
+                            <div style="text-align:right;margin-top:-15px;">
+                                <span id="text">双击进行修改,再次双击取消修改</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+    <script src="~/Needs/js/jquery.min.js?v=2.1.4"></script>
+    <script src="~/Needs/js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="~/Needs/js/plugins/footable/footable.all.min.js"></script>
+    <script src="~/Needs/js/content.min.js?v=1.0.0"></script>
+    <script>
+        $(document).ready(function () { $(".footable").footable(); $(".footable2").footable() });
+
+        $(function () {
+
+            //让提示文本内容颜色变化
+
+            var array = new Array();
+            array.push("green");
+            array.push("red");
+            array.push("black");
+            array.push("blue");
+            var a = Math.floor(Math.random() * 4);
+            setInterval(function () {
+                var b=Math.floor(Math.random() * 4);
+                while (a == b)
+                {
+                    b = Math.floor(Math.random() * 4);
+                }
+                a = b;
+                $("#text").css({ "color": array[a] });
+
+            }, 500)
+
+            $("#IsState").change(function () {
+
+                var value = $(this).val();
+
+                location.href = "/OrderForm/OrderFormInfo?IsState=" + value;
+
+            })
+
+            $("#soso").click(function () {
+
+                var text = $("#condition").val();
+
+                location.href = "/OrderForm/OrderFormInfo?conditions=" + text;
+
+            })
+            //-------------------------------------------------处理td的双击事件----------------------------------------------
+
+            //记录开始的文本内容
+            var name = "";//记录收件人
+            var phone = "";//记录电话号码
+            var state = "";//状态
+            var number="";
+            
+            $(".order_Update").dblclick(function () {
+                //让用户只能选中一行进行修改
+
+                //获取兄弟行
+                var b_tr=$(this).parent().siblings();
+
+                if (b_tr.find("input").length > 0 || b_tr.find("select").length > 0)
+                {
+                    layer.open({
+                        title: "提示",
+                        content: "请先取消已经打开修改模式的行，在进行修改其它行",
+                        btn: ["确定"],
+                        yes: function () {
+                            layer.closeAll();
+                        }
+                    });
+                    return;
+                }
+
+                var index = $(this).index();
+                //判断用户点击的编号
+                if (index == "0")
+                {
+                    layer.alert('抱歉，您所点击的是订单的唯一标识，所以不能修改');
+                    return;
+                }
+                else if (index == "4")
+                {
+
+                    layer.confirm('这是该订单商品的出售价,是否确定要进行对它的修改？（确定：跳转得到商品信息页;取消：返回继续修改订单）',{
+                        btn: ["确定", "取消"],
+                        btn1: function () {
+                            layer.msg('正在跳转，请稍后',10000, function () {
+
+                                location.href="/Mindex/Index_1"
+                            })
+                        },
+                        btn2: function () {
+                            layer.closeAll();
+                        }
+                    })
+                    return;
+                }
+                else if (index == 5) {
+                    if ($(this).find("select").length <= 0) {
+
+                        state = $(this).html();
+
+                        //获取下拉框选中的option的下标
+                        var _index = $(this).attr("IsState");
+                        //将其变成下拉框
+                        $(this).html();
+                        var select_str = $("#IsState").clone();
+                        select_str.find("option").each(function (index, item) {
+                            //删除第一个option
+                            if (index == 0) {
+                                $(item).remove();
+                            }
+                            //默认选中以前的状态
+                            if ($(item).val() == _index) {
+                                $(item).attr("selected", "selected");
+                            }
+                        })
+                        $(this).html(select_str);
+                    } else {
+                        $(this).html(state);
+                    }
+                }
+                else if (index==6)
+                {
+                    layer.open({
+
+                        title: "提示",
+                        content: "你是否确定要修改收货地址？",
+                        btn: ["确定", "取消"],
+                        btn1: function () {
+                            location.href = "";
+                        },
+                        btn2: function () {
+                            layer.msg("注意休息哦！！！",3)
+                        }
+                    })
+                }
+                else if(index==1) {
+                    //防止已经变为input 控件时,用户继续双击造成不必要的的影响
+
+                    var input_after = $(this).find("input"); //获取该点击的文本标签
+                   
+                    if (input_after.length > 0) {
+                        $(this).html(name);
+                    }
+                    else
+                    {
+                        //记录双击文本的内容
+
+                        name = $(this).html();
+                        //用input标签替换文本内容
+
+                        var input_str = "<input type='text' style='width:80px' sign='getname' value='" + name + "'/>";
+
+                        $(this).html(input_str);
+                    }
+                } else if (index == 2)
+                {
+                    //防止已经变为input 控件时,用户继续双击造成不必要的的影响
+
+                    var input_after = $(this).find("input"); //获取该点击的文本标签
+
+                    if (input_after.length > 0) {
+                        $(this).html(phone);
+                    }
+                    else {
+                        //记录双击文本的内容
+
+                        phone = $(this).html();
+                        //用input标签替换文本内容
+
+                        var input_str = "<input type='text' style='width:80px' sign='phone' value='" + phone + "'/>";
+
+                        $(this).html(input_str);
+                    }
+                }
+                else if (index == 3)
+                {
+                    //防止已经变为input 控件时,用户继续双击造成不必要的的影响
+
+                    var input_after = $(this).find("input"); //获取该点击的文本标签
+
+                    if (input_after.length > 0) {
+                        $(this).html(number);
+                    }
+                    else {
+                        //记录双击文本的内容
+
+                        number = $(this).html();
+                        //用input标签替换文本内容
+
+                        var input_str = "<input type='text' style='width:80px' sign='number' value='" + number + "'/>";
+
+                        $(this).html(input_str);
+                    }
+                }
+
+            })
+            //-------------------------------------------------点击按钮事件---------------------------------------------------
+            $("button[type='button']").click(function () {
+
+                if ($(this).index() == 0)
+                {
+                    //获取父级tr标签
+                    var tr = $(this).parent().parent();
+
+                    //判断用户是否点击该行（tr），防止用户并没有双击行，却去点击修改
+                    var num_input = tr.find("input").length;
+                    var num_select = tr.find("select").length;
+                    if (num_input == 0&&num_select==0)  //如果没有双击，提示回到点击之前
+                    {
+                        layer.alert('baby,请双击你要修改文本内容');
+                        return;
+                    }
+                    //获取用户点击行的订单标识
+                    var id=$(this).parent().parent().find("td:eq(0)").html()
+                    //处理数据（用户双击之后的获取值的处理）
+                    //获取input 控件的val值
+                    var getname=tr.find("td:eq(1)").html();//收件人
+                    var witephone = tr.find("td:eq(2)").html();//预留电话
+                    var shopnumber = tr.find("td:eq(3)").html();//购买数量
+                    var isstate = tr.find("td:eq(5)").attr("isstate");//订单状态
+                    $("input[type='text']").each(function (index, item) {
+
+                        var sign = $(item).attr("sign");
+                        if (sign == "getname")
+                            getname = $(item).val();
+                        else if (sign == "phone")
+                            witephone = $(item).val();
+                        else if (sign == "number")
+                            shopnumber = $(item).val();
+                    })
+                    if (shopnumber == 0)
+                    {
+                        alert("注意：商品数量应>=1！！！");
+                        return;
+                    }
+                    var state_html = tr.find("td:eq(5)").html();
+                    $("select").each(function (index,item) {
+
+                        if (index == 1)
+                        {
+                            isstate = $(item).find("option:selected").val();
+                            state_html = $(item).find("option:selected").text();
+                        }
+
+                    })
+                    var json = {
+                        OFI_ID: id,
+                        OFI_Number: shopnumber,
+                        GetName: getname,
+                        Phone: witephone,
+                        IsState:isstate
+                    };
+                    $.ajax({
+                        url: "/OrderForm/Update_order?strjson=" + JSON.stringify(json),
+                        success: function (result)
+                        {
+                            //修改成功将控件复原
+                            if (result == "success") {
+                                var needtd = "";
+                                $("input").each(function (index, item) {
+
+                                    if (index >= 0) {
+                                        //获取上一级td
+                                        needtd = $(item).parent();
+
+                                        $(needtd).html($(item).val());
+                                    }
+
+                                })
+                                //下拉框
+                                $("select").each(function (index, item) {
+
+                                    if (index == 1) {
+                                        needtd = $(item).parent();
+                                        needtd.attr("isstate",isstate);
+                       
+                                        needtd.html($(this).find("option:selected").text());
+                                    }
+
+                                })
+                            }
+                            else {
+                                layer.open({
+                                    title: "提示",
+                                    content: "修改失败",
+                                    btn: ["确定"],
+                                    yes: function () {
+                                        location.href="/OrderInfo/OrderFormInfo"
+                                    }
+                                })
+                            }
+                        }
+                    })
+                  
+                }
+                else if ($(this).index() == 1)
+                {
+                    var ids=$(this).parent().parent().find("td:eq(0)").html()
+
+
+                    $.ajax({
+                        url: "/OrderForm/Delete_Order?orderid=" + ids,
+                        async:true,
+                        success: function (result) {
+                            if (result > 0)
+                                location.href = "/OrderForm/OrderFormInfo";
+                            else
+                                alert("删除失败");
+                        }
+                        })
+                }
+
+            })
+
+        })
+
+    </script>

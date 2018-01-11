@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="7d4999ad4cea4e249088c452eea5d39f" Name="关系图1">
+        <EntityTypeShape EntityType="shopDBModel.AdministratorInfo" Width="1.5" PointX="0.5" PointY="0.5" />
+        <EntityTypeShape EntityType="shopDBModel.ActivityInfo" Width="1.5" PointX="2.5" PointY="0.5" />
+        <EntityTypeShape EntityType="shopDBModel.BuyerInfo" Width="1.5" PointX="4.75" PointY="0.5" />
+        <EntityTypeShape EntityType="shopDBModel.CollectGoodsInfo" Width="1.5" PointX="6.625" PointY="0.5" />
+        <EntityTypeShape EntityType="shopDBModel.CommodityInfo" Width="1.5" PointX="3.625" PointY="7.5" />
+        <EntityTypeShape EntityType="shopDBModel.CommodityTypeInfo" Width="1.5" PointX="7.6822667735080543" PointY="31.364450320305512" />
+        <EntityTypeShape EntityType="shopDBModel.CouponInfo" Width="1.5" PointX="0.625" PointY="4.375" />
+        <EntityTypeShape EntityType="shopDBModel.FootprintInfo" Width="1.5" PointX="8.25" PointY="4.75" />
+        <EntityTypeShape EntityType="shopDBModel.MyAddressInfo" Width="1.5" PointX="6.375" PointY="4.625" />
+        <EntityTypeShape EntityType="shopDBModel.OrderFormInfo" Width="1.5" PointX="4.5" PointY="4.625" />
+        <EntityTypeShape EntityType="shopDBModel.ReckoningInfo" Width="1.5" PointX="2.75" PointY="4.875" />
+        <EntityTypeShape EntityType="shopDBModel.ShopCartInfo" Width="1.5" PointX="8.5" PointY="0.5" />
+        <EntityTypeShape EntityType="shopDBModel.StoreInfo" Width="1.5" PointX="3.2264654409263587" PointY="31.410453617298256" />
+        <EntityTypeShape EntityType="shopDBModel.StoreTypeInfo" Width="1.5" PointX="6.625" PointY="2.5" />
+        <EntityTypeShape EntityType="shopDBModel.Express" Width="1.5" PointX="1.25" PointY="7.5" />
+        <EntityTypeShape EntityType="shopDBModel.Dic_OrderFormInfo_OFI_States1" Width="1.5" PointX="0.9063403536129464" PointY="26.15576265480172" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

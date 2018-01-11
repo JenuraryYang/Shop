@@ -1,0 +1,219 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="shopDBModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="shopDBEntities" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="AdministratorInfo" EntityType="shopDBModel.AdministratorInfo" />
+    <EntitySet Name="ActivityInfo" EntityType="shopDBModel.ActivityInfo" />
+    <EntitySet Name="BuyerInfo" EntityType="shopDBModel.BuyerInfo" />
+    <EntitySet Name="CollectGoodsInfo" EntityType="shopDBModel.CollectGoodsInfo" />
+    <EntitySet Name="CommodityInfo" EntityType="shopDBModel.CommodityInfo" />
+    <EntitySet Name="CommodityTypeInfo" EntityType="shopDBModel.CommodityTypeInfo" />
+    <EntitySet Name="CouponInfo" EntityType="shopDBModel.CouponInfo" />
+    <EntitySet Name="FootprintInfo" EntityType="shopDBModel.FootprintInfo" />
+    <EntitySet Name="MyAddressInfo" EntityType="shopDBModel.MyAddressInfo" />
+    <EntitySet Name="OrderFormInfo" EntityType="shopDBModel.OrderFormInfo" />
+    <EntitySet Name="ReckoningInfo" EntityType="shopDBModel.ReckoningInfo" />
+    <EntitySet Name="ShopCartInfo" EntityType="shopDBModel.ShopCartInfo" />
+    <EntitySet Name="StoreInfo" EntityType="shopDBModel.StoreInfo" />
+    <EntitySet Name="StoreTypeInfo" EntityType="shopDBModel.StoreTypeInfo" />
+    <EntitySet Name="Express" EntityType="shopDBModel.Express" />
+    <EntitySet Name="Dic_OrderFormInfo_OFI_States1集" EntityType="shopDBModel.Dic_OrderFormInfo_OFI_States1" />
+  </EntityContainer>
+  <EntityType Name="AdministratorInfo">
+    <Key>
+      <PropertyRef Name="AI_ID" />
+    </Key>
+    <Property Type="Int32" Name="AI_ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="AI_HImage" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="AI_Num" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="AI_LoginPwd" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="AI_Name" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="AI_Sex" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="AI_IDCard" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="AI_Alipay" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="AI_Balance" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="AI_Type" />
+    <Property Type="DateTime" Name="AI_Date" Precision="3" />
+  </EntityType>
+  <EntityType Name="ActivityInfo">
+    <Key>
+      <PropertyRef Name="AI_ID" />
+    </Key>
+    <Property Type="Int32" Name="AI_ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="AI_CI_ID" />
+    <Property Type="String" Name="AI_Price" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="AI_Starttime" Precision="3" />
+    <Property Type="DateTime" Name="AI_Endtime" Precision="3" />
+    <Property Type="Int32" Name="AI_IS" />
+  </EntityType>
+  <EntityType Name="BuyerInfo">
+    <Key>
+      <PropertyRef Name="BI_ID" />
+    </Key>
+    <Property Type="Int32" Name="BI_ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="BI_HImage" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="BI_Phone" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="BI_NickName" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="BI_LoginPwd" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="BI_Name" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="BI_IDCared" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="BI_Sex" />
+    <Property Type="String" Name="BI_PayPwd" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="BI_Balance" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="BI_Date" Precision="3" />
+    <Property Type="Int32" Name="BI_SumScore" />
+  </EntityType>
+  <EntityType Name="CollectGoodsInfo">
+    <Key>
+      <PropertyRef Name="CGI_ID" />
+    </Key>
+    <Property Type="Int32" Name="CGI_ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="CGI_CI_ID" />
+    <Property Type="Int32" Name="CGI_BI_ID" />
+    <Property Type="DateTime" Name="CGI_Time" Precision="3" />
+  </EntityType>
+  <EntityType Name="CommodityInfo">
+    <Key>
+      <PropertyRef Name="CI_ID" />
+    </Key>
+    <Property Type="Int32" Name="CI_ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="CI_CTI_ID" />
+    <Property Type="Int32" Name="CI_SI_ID" />
+    <Property Type="String" Name="CI_Name" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="DateTime" Name="CI_CreateDate" Precision="3" />
+    <Property Type="Int32" Name="CI_Is" />
+    <Property Type="Int32" Name="CI_Num" />
+    <Property Type="Int32" Name="CI_SalesNum" />
+    <Property Type="String" Name="CI_Discount" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="CI_Price" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="CI_NowPrice" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="CI_Url" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="CI_Sendgoods" />
+  </EntityType>
+  <EntityType Name="CommodityTypeInfo">
+    <Key>
+      <PropertyRef Name="CTI_ID" />
+    </Key>
+    <Property Type="Int32" Name="CTI_ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="CTI_Name" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="CTI_CTI_ID" />
+    <Property Type="String" Name="CTI_Remark" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="CTI_SaveUrl" MaxLength="20" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="CouponInfo">
+    <Key>
+      <PropertyRef Name="CPI_ID" />
+    </Key>
+    <Property Type="Int32" Name="CPI_ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="CPI_Type" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="CPI_MaxMoney" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="CPI_MinusMoney" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="CPI_CouponType" />
+    <Property Type="Int32" Name="CPI_CI_ID" />
+    <Property Type="DateTime" Name="CPI_BeginDate" Precision="3" />
+    <Property Type="DateTime" Name="CPI_EndDate" Precision="3" />
+    <Property Type="Int32" Name="CPI_IS" />
+  </EntityType>
+  <EntityType Name="FootprintInfo">
+    <Key>
+      <PropertyRef Name="FI_ID" />
+    </Key>
+    <Property Type="Int32" Name="FI_ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="FI_BI_ID" />
+    <Property Type="Int32" Name="FI_CI_ID" />
+    <Property Type="DateTime" Name="FI_Date" Precision="3" />
+  </EntityType>
+  <EntityType Name="MyAddressInfo">
+    <Key>
+      <PropertyRef Name="MAI_ID" />
+    </Key>
+    <Property Type="Int32" Name="MAI_ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="MAI_Type" />
+    <Property Type="Int32" Name="MAI_BI_ID" />
+    <Property Type="String" Name="MAI_Phone" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="MAI_Province" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="MAI_City" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="MAI_County" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="MAI_Town" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="MAI_MinuteAddress" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="MAI_IS" />
+    <Property Type="String" Name="MAI_Remark" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="MAI_Name" MaxLength="20" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="OrderFormInfo">
+    <Key>
+      <PropertyRef Name="OFI_ID" />
+    </Key>
+    <Property Type="Int32" Name="OFI_ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="OFI_CI_ID" />
+    <Property Type="Int32" Name="OFI_Number" />
+    <Property Type="Int32" Name="OFI_BI_ID" />
+    <Property Type="String" Name="OFI_Money" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="OFI_States" />
+    <Property Type="DateTime" Name="OFI_CreateDate" Precision="3" />
+    <Property Type="Int32" Name="OFI_SAI_ID" />
+    <Property Type="String" Name="OFI_Address" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="Express_ID" />
+  </EntityType>
+  <EntityType Name="ReckoningInfo">
+    <Key>
+      <PropertyRef Name="RI_ID" />
+    </Key>
+    <Property Type="Int32" Name="RI_ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="RI_BI_ID" />
+    <Property Type="Int32" Name="RI_CI_ID" />
+    <Property Type="Int32" Name="RI_CPI_ID" />
+    <Property Type="String" Name="RI_Amount" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="RI_States" />
+    <Property Type="DateTime" Name="RI_TransactionDate" Precision="3" />
+    <Property Type="String" Name="RI_Remark" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="ShopCartInfo">
+    <Key>
+      <PropertyRef Name="SCI_ID" />
+    </Key>
+    <Property Type="Int32" Name="SCI_ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="SCI_BI_ID" />
+    <Property Type="Int32" Name="SCI_CI_ID" />
+    <Property Type="Int32" Name="SCI_Number" />
+    <Property Type="Int32" Name="SCI_Caozuo" />
+    <Property Type="String" Name="SCI_Money" MaxLength="5" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="StoreInfo">
+    <Key>
+      <PropertyRef Name="SI_ID" />
+    </Key>
+    <Property Type="Int32" Name="SI_ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="SI_AI_ID" />
+    <Property Type="Int32" Name="SI_STI_ID" />
+    <Property Type="String" Name="SI_Name" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="SI_Logo" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="SI_Intro" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="DateTime" Name="SI_CreateDate" Precision="3" />
+    <Property Type="String" Name="SI_Remark" MaxLength="20" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="StoreTypeInfo">
+    <Key>
+      <PropertyRef Name="STI_ID" />
+    </Key>
+    <Property Type="Int32" Name="STI_ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="STI_Name" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="STI_Remark" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Express">
+    <Key>
+      <PropertyRef Name="Express_ID" />
+    </Key>
+    <Property Type="Int32" Name="Express_ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Express_Name" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="Express_Expense" />
+    <Property Type="String" Name="Express_Image" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Express_Desc" MaxLength="256" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Dic_OrderFormInfo_OFI_States1">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="name" MaxLength="10" FixedLength="false" Unicode="false" />
+  </EntityType>
+</Schema>

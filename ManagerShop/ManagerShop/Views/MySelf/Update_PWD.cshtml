@@ -1,0 +1,139 @@
+﻿@{
+    ViewBag.Title = "Update_PWD";
+    Layout = "~/Views/Master_Layout.cshtml";
+}
+
+<script src="~/js/jquery-1.9.1.min.js"></script>
+
+<script src="~/Needs/js/plugins/layer/layer.min.js"></script>
+
+<style>
+
+    table tr td {
+    
+        padding:5px
+    }
+
+</style>
+
+<form id="form1">
+
+    <div style="position:absolute;top:50%;left:50%;font-size:25px">
+        <table style="margin-left:-60px;margin-top:-40px">
+
+    <tr>
+        <td>账  &nbsp;&nbsp; &nbsp; &nbsp;号：</td>
+        <td><input type="text" class="num" value="@ViewBag.Number" name="AI_Num" readonly="readonly" /></td>
+    </tr>
+           
+    <tr>
+        <td>密  &nbsp;&nbsp; &nbsp; &nbsp;码：</td>
+        <td><input type="password" value="@ViewBag.Pwd" name="AI_LoginPwd" class="pwd"  /></td>
+    </tr>
+    
+    <tr hidden="hidden" class="htr">
+        <td>确认密码：</td>
+        <td><input type="password" class="_pwd" name="" /></td>
+    </tr>
+            <tr>
+                <td colspan="2">
+                     <p style="padding-top:30px;padding-left:50px;margin-left:80px;">
+                                <button class="btn btn-default btn-rounded" style="width:70px;height:40px;font-weight:700" id="updatePwd" type="button">新增</button>
+                                <a class="btn btn-primary btn-rounded" style="margin-left:50px;width:70px;height:40px;font-weight:700" href="~/MySelf/Update_Pwd">取消</a>     
+                            </p>
+
+                </td>
+            </tr>
+
+</table>
+</div>
+
+</form>
+
+<script>
+
+    $(function () {
+
+        $(".pwd").focus(function(){
+        
+            $(".htr").removeAttr("hidden");
+
+        })
+
+        $("#updatePwd").click(function () {
+
+            var num = $(".num").val();
+            var pass=$(".pwd").val();
+            var pass2 = $("._pwd").val();
+
+            if (pass == null||pass==""||pass.length<6)
+            {
+                layer.open({
+                    type:0,
+                    title: "为空提示",
+                    content:"密码为空提示:密码长度>=6",
+                    btn: ["确定"],
+                    btn1: function () {
+
+                        layer.closeAll();
+
+                    }
+                })
+            }
+            else if (pass != pass2) {
+                layer.open({
+                    type: 0,
+                    title: "验证提示",
+                    content: "两次输入的密码不一致",
+                    btn: ["确定"],
+                    btn1: function () {
+
+                        layer.closeAll();
+
+                    }
+                })
+            }
+            else {
+
+                $.ajax({
+                    url: "/MySelf/Update_Behave?AI_Num="+num+"&AI_LoginPwd="+pass,
+                    async:true,
+                    success: function (result) {
+                        alert(result);
+                        if (result == "1") {
+                            layer.open({
+
+                                title: "提示",
+                                content: "修改密码成功，是确定重新登录？",
+                                btn: ["确定", "取消"],
+                                btn1: function () {
+                                    location.href = "/Login/Login_Index";
+                                }
+
+                            })
+                        }
+                        else {
+                            layer.open({
+                                title: "提示",
+                                content: "密码修改失败，是否回到修改页面？",
+                                btn: ["是", "否"],
+                                btn1: function () {
+                                    layer.closeAll();
+                                },
+                                btn2: function () {
+                                    location.href = "/Mindex/index";
+                                }
+                            })
+
+                        }
+                    }
+
+                })
+
+            }
+
+        })
+
+    })
+
+</script>

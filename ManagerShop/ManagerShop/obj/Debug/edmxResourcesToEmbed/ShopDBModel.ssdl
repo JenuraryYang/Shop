@@ -1,0 +1,219 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="shopDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="shopDBModelStoreContainer">
+    <EntitySet Name="ActivityInfo" EntityType="shopDBModel.Store.ActivityInfo" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="AdministratorInfo" EntityType="shopDBModel.Store.AdministratorInfo" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="BuyerInfo" EntityType="shopDBModel.Store.BuyerInfo" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CollectGoodsInfo" EntityType="shopDBModel.Store.CollectGoodsInfo" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CommodityInfo" EntityType="shopDBModel.Store.CommodityInfo" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CommodityTypeInfo" EntityType="shopDBModel.Store.CommodityTypeInfo" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CouponInfo" EntityType="shopDBModel.Store.CouponInfo" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Dic_OrderFormInfo_OFI_States" EntityType="shopDBModel.Store.Dic_OrderFormInfo_OFI_States" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Express" EntityType="shopDBModel.Store.Express" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="FootprintInfo" EntityType="shopDBModel.Store.FootprintInfo" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="MyAddressInfo" EntityType="shopDBModel.Store.MyAddressInfo" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="OrderFormInfo" EntityType="shopDBModel.Store.OrderFormInfo" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ReckoningInfo" EntityType="shopDBModel.Store.ReckoningInfo" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ShopCartInfo" EntityType="shopDBModel.Store.ShopCartInfo" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="StoreInfo" EntityType="shopDBModel.Store.StoreInfo" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="StoreTypeInfo" EntityType="shopDBModel.Store.StoreTypeInfo" store:Type="Tables" Schema="dbo" />
+  </EntityContainer>
+  <EntityType Name="ActivityInfo">
+    <Key>
+      <PropertyRef Name="AI_ID" />
+    </Key>
+    <Property Name="AI_ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="AI_CI_ID" Type="int" />
+    <Property Name="AI_Price" Type="varchar" MaxLength="5" />
+    <Property Name="AI_Starttime" Type="datetime" />
+    <Property Name="AI_Endtime" Type="datetime" />
+    <Property Name="AI_IS" Type="int" />
+  </EntityType>
+  <EntityType Name="AdministratorInfo">
+    <Key>
+      <PropertyRef Name="AI_ID" />
+    </Key>
+    <Property Name="AI_ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="AI_HImage" Type="varchar" MaxLength="30" />
+    <Property Name="AI_Num" Type="varchar" MaxLength="20" />
+    <Property Name="AI_LoginPwd" Type="varchar" MaxLength="20" />
+    <Property Name="AI_Name" Type="varchar" MaxLength="20" />
+    <Property Name="AI_Sex" Type="varchar" MaxLength="2" />
+    <Property Name="AI_IDCard" Type="varchar" MaxLength="20" />
+    <Property Name="AI_Alipay" Type="varchar" MaxLength="20" />
+    <Property Name="AI_Balance" Type="varchar" MaxLength="20" />
+    <Property Name="AI_Type" Type="int" />
+    <Property Name="AI_Date" Type="datetime" />
+  </EntityType>
+  <EntityType Name="BuyerInfo">
+    <Key>
+      <PropertyRef Name="BI_ID" />
+    </Key>
+    <Property Name="BI_ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="BI_HImage" Type="varchar" MaxLength="30" />
+    <Property Name="BI_Phone" Type="varchar" MaxLength="20" />
+    <Property Name="BI_NickName" Type="nvarchar" MaxLength="20" />
+    <Property Name="BI_LoginPwd" Type="nvarchar" MaxLength="20" />
+    <Property Name="BI_Name" Type="nvarchar" MaxLength="20" />
+    <Property Name="BI_IDCared" Type="varchar" MaxLength="20" />
+    <Property Name="BI_Sex" Type="int" />
+    <Property Name="BI_PayPwd" Type="nvarchar" MaxLength="20" />
+    <Property Name="BI_Balance" Type="varchar" MaxLength="10" />
+    <Property Name="BI_Date" Type="datetime" />
+    <Property Name="BI_SumScore" Type="int" />
+  </EntityType>
+  <EntityType Name="CollectGoodsInfo">
+    <Key>
+      <PropertyRef Name="CGI_ID" />
+    </Key>
+    <Property Name="CGI_ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="CGI_CI_ID" Type="int" />
+    <Property Name="CGI_BI_ID" Type="int" />
+    <Property Name="CGI_Time" Type="datetime" />
+  </EntityType>
+  <EntityType Name="CommodityInfo">
+    <Key>
+      <PropertyRef Name="CI_ID" />
+    </Key>
+    <Property Name="CI_ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="CI_CTI_ID" Type="int" />
+    <Property Name="CI_SI_ID" Type="int" />
+    <Property Name="CI_Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="CI_CreateDate" Type="datetime" />
+    <Property Name="CI_Is" Type="int" />
+    <Property Name="CI_Num" Type="int" />
+    <Property Name="CI_SalesNum" Type="int" />
+    <Property Name="CI_Discount" Type="varchar" MaxLength="5" />
+    <Property Name="CI_Price" Type="varchar" MaxLength="10" />
+    <Property Name="CI_NowPrice" Type="varchar" MaxLength="10" />
+    <Property Name="CI_Url" Type="varchar" MaxLength="30" />
+    <Property Name="CI_Sendgoods" Type="int" />
+  </EntityType>
+  <EntityType Name="CommodityTypeInfo">
+    <Key>
+      <PropertyRef Name="CTI_ID" />
+    </Key>
+    <Property Name="CTI_ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="CTI_Name" Type="varchar" MaxLength="20" />
+    <Property Name="CTI_CTI_ID" Type="int" />
+    <Property Name="CTI_SaveUrl" Type="nvarchar" MaxLength="20" />
+    <Property Name="CTI_Remark" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="CouponInfo">
+    <Key>
+      <PropertyRef Name="CPI_ID" />
+    </Key>
+    <Property Name="CPI_ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="CPI_Type" Type="varchar" MaxLength="5" />
+    <Property Name="CPI_MaxMoney" Type="varchar" MaxLength="10" />
+    <Property Name="CPI_MinusMoney" Type="varchar" MaxLength="10" />
+    <Property Name="CPI_CouponType" Type="int" />
+    <Property Name="CPI_CI_ID" Type="int" />
+    <Property Name="CPI_BeginDate" Type="datetime" />
+    <Property Name="CPI_EndDate" Type="datetime" />
+    <Property Name="CPI_IS" Type="int" />
+  </EntityType>
+  <EntityType Name="Dic_OrderFormInfo_OFI_States">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="varchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="Express">
+    <Key>
+      <PropertyRef Name="Express_ID" />
+    </Key>
+    <Property Name="Express_ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Express_Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Express_Expense" Type="int" />
+    <Property Name="Express_Image" Type="nvarchar" MaxLength="64" />
+    <Property Name="Express_Desc" Type="nvarchar" MaxLength="256" />
+  </EntityType>
+  <EntityType Name="FootprintInfo">
+    <Key>
+      <PropertyRef Name="FI_ID" />
+    </Key>
+    <Property Name="FI_ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="FI_BI_ID" Type="int" />
+    <Property Name="FI_CI_ID" Type="int" />
+    <Property Name="FI_Date" Type="datetime" />
+  </EntityType>
+  <EntityType Name="MyAddressInfo">
+    <Key>
+      <PropertyRef Name="MAI_ID" />
+    </Key>
+    <Property Name="MAI_ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="MAI_Name" Type="nvarchar" MaxLength="20" />
+    <Property Name="MAI_Type" Type="int" />
+    <Property Name="MAI_BI_ID" Type="int" />
+    <Property Name="MAI_Phone" Type="varchar" MaxLength="20" />
+    <Property Name="MAI_Province" Type="nvarchar" MaxLength="20" />
+    <Property Name="MAI_City" Type="nvarchar" MaxLength="20" />
+    <Property Name="MAI_County" Type="nvarchar" MaxLength="20" />
+    <Property Name="MAI_Town" Type="nvarchar" MaxLength="20" />
+    <Property Name="MAI_MinuteAddress" Type="nvarchar" MaxLength="50" />
+    <Property Name="MAI_IS" Type="int" />
+    <Property Name="MAI_Remark" Type="nvarchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="OrderFormInfo">
+    <Key>
+      <PropertyRef Name="OFI_ID" />
+    </Key>
+    <Property Name="OFI_ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="OFI_CI_ID" Type="int" />
+    <Property Name="OFI_Number" Type="int" />
+    <Property Name="OFI_BI_ID" Type="int" />
+    <Property Name="OFI_Money" Type="varchar" MaxLength="15" />
+    <Property Name="OFI_States" Type="int" />
+    <Property Name="OFI_CreateDate" Type="datetime" />
+    <Property Name="OFI_SAI_ID" Type="int" />
+    <Property Name="OFI_Address" Type="varchar" MaxLength="50" />
+    <Property Name="Express_ID" Type="int" />
+  </EntityType>
+  <EntityType Name="ReckoningInfo">
+    <Key>
+      <PropertyRef Name="RI_ID" />
+    </Key>
+    <Property Name="RI_ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="RI_BI_ID" Type="int" />
+    <Property Name="RI_CI_ID" Type="int" />
+    <Property Name="RI_CPI_ID" Type="int" />
+    <Property Name="RI_Amount" Type="varchar" MaxLength="20" />
+    <Property Name="RI_States" Type="int" />
+    <Property Name="RI_TransactionDate" Type="datetime" />
+    <Property Name="RI_Remark" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="ShopCartInfo">
+    <Key>
+      <PropertyRef Name="SCI_ID" />
+    </Key>
+    <Property Name="SCI_ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="SCI_BI_ID" Type="int" />
+    <Property Name="SCI_CI_ID" Type="int" />
+    <Property Name="SCI_Number" Type="int" />
+    <Property Name="SCI_Caozuo" Type="int" />
+    <Property Name="SCI_Money" Type="varchar" MaxLength="5" />
+  </EntityType>
+  <EntityType Name="StoreInfo">
+    <Key>
+      <PropertyRef Name="SI_ID" />
+    </Key>
+    <Property Name="SI_ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="SI_AI_ID" Type="int" />
+    <Property Name="SI_STI_ID" Type="int" />
+    <Property Name="SI_Name" Type="nvarchar" MaxLength="20" />
+    <Property Name="SI_Logo" Type="nvarchar" MaxLength="30" />
+    <Property Name="SI_Intro" Type="nvarchar" MaxLength="100" />
+    <Property Name="SI_CreateDate" Type="datetime" />
+    <Property Name="SI_Remark" Type="nvarchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="StoreTypeInfo">
+    <Key>
+      <PropertyRef Name="STI_ID" />
+    </Key>
+    <Property Name="STI_ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="STI_Name" Type="nvarchar" MaxLength="20" />
+    <Property Name="STI_Remark" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+</Schema>

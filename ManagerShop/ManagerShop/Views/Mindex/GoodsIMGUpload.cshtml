@@ -1,0 +1,57 @@
+﻿@{
+    ViewBag.Title = "GoodsIMGUpload";
+    Layout = "~/Views/Master_Layout.cshtml";
+}
+@using ManagerShop
+@model List<CommodityTypeInfo>
+<link href="~/dropzone/dropzone.css" rel="stylesheet" />
+<script src="~/dropzone/dropzone.js"></script>
+<script src="~/dropzone/jquery-1.10.1.min.js"></script>
+
+
+<script>
+
+
+    Dropzone.options.dropzoneform = {
+        autoProcessQueue: false,//设置自动提交为false
+        uploadMultiple: true,
+        parallelUploads: 100,
+        addRemoveLinks: true,
+        dictRemoveFile:"remove",
+        init: function ()
+        {
+            var dropzoneobj = this;
+
+            $("#uploadbut").click(function () {
+                dropzoneobj.processQueue();
+            });
+
+        }
+    };
+
+
+</script>
+
+
+<form style="margin:10px 10px 5px 0px;height:500px" enctype="multipart/form-data"  action="/Mindex/SaveIMG" class="dropzone" id="dropzoneform">
+    <div style="margin:10px 10px">
+<span style="font-size:20px">
+
+    请选择保存的文件夹<select style="margin-left:5px;width:120px;height:30px" name="fileurl" id="fileurl" class="fileurl" >
+   @{
+       foreach (var item in Model)
+       {
+           <option value="@item.CTI_SaveUrl">@item.CTI_Name</option>
+       }
+       }
+         </select>
+
+</span>
+
+<input type="button" class="btn btn-primary" style="width:100px;margin-left:50px;margin-top:-5px" value="上传" id="uploadbut">
+
+</div>
+</form>
+
+@*<input id="uploadbut" type="button" value="上传" />*@
+

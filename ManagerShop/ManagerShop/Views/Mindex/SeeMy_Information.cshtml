@@ -1,0 +1,62 @@
+﻿
+@using ManagerShop
+
+@{
+    ViewBag.Title = "个人全部信息";
+    AdministratorInfo admin = Session["Admin_Information"] as AdministratorInfo;
+}
+ 
+
+<link rel="shortcut icon" href="~/Needs/favicon.ico"> <link href="~/Needs/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="~/Needs/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="~/Needs/css/animate.min.css" rel="stylesheet">
+    <link href="~/Needs/css/style.min862f.css?v=4.1.0" rel="stylesheet">
+<div class="col-sm-4" style="margin-left:450px">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>个人资料</h5>
+                    </div>
+                    <div>
+                        <div class="ibox-content no-padding border-left-right">
+                            <img alt="image" class="img-responsive" src="~/Needs/head/@admin.AI_HImage">
+                        </div>
+                        <div class="ibox-content profile-content">
+                            <h4><strong>Beaut-zihan</strong></h4>
+                            <p><i class="fa fa-map-marker"></i> 上海市闵行区绿地科技岛广场A座2606室</p>
+                            <h5>
+                                    关于我
+                                </h5>
+                            <p>
+                                手机号：@admin.AI_Num,用户名：@admin.AI_Name,支付账号：@admin.AI_Alipay 等等
+                            </p>
+                            
+                            <div class="user-button">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <button type="button" class="btn btn-primary btn-sm btn-block" id="button1"><i class="fa fa-envelope"></i> 返  回</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+  <script src="~/Needs/js/jquery.min.js?v=2.1.4"></script>
+    <script src="~/Needs/js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="~/Needs/js/content.min.js?v=1.0.0"></script>
+    <script src="~/Needs/js/plugins/peity/jquery.peity.min.js"></script>
+    <script src="~/Needs/js/demo/peity-demo.min.js"></script>
+<script>
+
+    $(function () {
+
+        $("#button1").click(function () {
+
+            location.href="/Mindex/Index_1"
+
+        })
+
+    })
+
+</script>

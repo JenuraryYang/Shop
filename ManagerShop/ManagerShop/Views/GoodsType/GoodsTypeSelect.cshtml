@@ -1,0 +1,152 @@
+﻿@{
+    ViewBag.Title = "GoodsTypeSelect";
+    Layout = "~/Views/Master_Layout.cshtml";
+
+    List<CommodityTypeInfo> F_list = ViewBag.F_list as List<CommodityTypeInfo>;
+    List<CommodityTypeInfo> S_list = ViewBag.S_list as List<CommodityTypeInfo>;
+    
+}
+@using ManagerShop
+@model List<ManagerShop.dto.GoodsType>
+<div class="example-wrap" style="margin-left:10px;margin-top:20px;margin-right:10px;font-size:20px">
+                            <div class="example">
+                                <div class="alert alert-success" id="examplebtTableEventsResult" role="alert">
+                                    商品类型
+                                </div>
+                                <div class="bootstrap-table"><div class="fixed-table-toolbar"><div class="bars pull-left"><div class="btn-group hidden-xs" id="exampleTableEventsToolbar" role="group">
+                                    <a type="button" href="~/GoodsType/GoodsTypeInsert" class="btn btn-outline btn-default">
+                                        <i class="glyphicon glyphicon-plus" aria-hidden="true"></i>
+                                    </a>
+                                    <span   class="btn btn-outline btn-default">
+                                        <i class="glyphicon glyphicon-heart" aria-hidden="true"></i>
+                                    </span>
+                                    <button type="button" id="delete" class="btn btn-outline btn-default">
+                                        <i class="glyphicon glyphicon-trash" aria-hidden="true"></i>
+                                    </button>
+                                </div></div><div class="columns columns-right btn-group pull-right"><button class="btn btn-default btn-outline" type="button" name="refresh" title="刷新"><i class="glyphicon glyphicon-repeat"></i></button>
+                                   </div><div class="pull-right search"><input class="form-control input-outline" type="text" placeholder="搜索"></div></div><div class="fixed-table-container" style="height: 321px; padding-bottom: 36px;"><div class="fixed-table-header" style="margin-right: 0px; display: block;">
+                                 </div><div class="fixed-table-body">
+                                     <table id="exampleTableEvents" data-height="400" data-mobile-responsive="true" class="table table-hover" style="margin-top: -36px;>
+                                    <thead style="display: table-header-group;">
+                                        <tr><th tabindex="0"> <input  type="checkbox" id="MainCheck" /><span style="margin-left:20px"> 商品大类型</span></th>
+                                            <th  style="padding-right:680px"  tabindex="0">小类型</th>    
+                                        </tr></thead>
+                                <tbody>
+                                    @{
+                                        foreach (var item in F_list)
+                                        {
+                                            <tr style="padding-top:30px">
+                                                <td><input type="checkbox" class="two" id="@item.CTI_ID"  /><label for="@item.CTI_ID">@item.CTI_Name</label></td>
+                                                <td>
+                                              @{
+                                            foreach (var item2 in S_list)
+                                            {
+
+                                                if (item.CTI_ID == item2.CTI_CTI_ID)
+                                                { 
+                                                    <input type="checkbox" class="three" id="@item2.CTI_ID" /> <label for="@item2.CTI_ID">@item2.CTI_Name</label>
+                                                }
+                                            }
+                                                  }
+                                                </td>
+                                            </tr>
+                                        }
+                                     }
+                                </tbody>
+                                </table>
+                            </div>
+                        </div>
+                                    <script src="~/js/jquery-1.9.1.min.js"></script>
+<script>
+
+    $(function () {
+
+
+        //点击th标签中的复选框按钮
+        $("#MainCheck").click(function () {
+         
+            if (this.checked) {
+                $("input[type='checkbox']").each(function () {
+
+                    this.checked = true;
+
+                })
+            } else {
+                $("input[type='checkbox']").each(function () {
+
+                    this.checked = false;
+
+                })
+            }
+        })
+        //点击td中的第一列
+        $(".two").click(function () {
+                if (this.checked) {
+
+                    $(this).parent().siblings().find("input[type='checkbox']").each(function () {
+
+                        this.checked = true;
+
+                    })
+                }
+                else {
+                    $(this).parent().siblings().find("input[type='checkbox']").each(function () {
+
+                        this.checked = false;
+
+                    })
+                }
+        })
+        //让td第二列选择完了自后自动选择前一列的复选框
+
+        $(".three").click(function () {
+
+            var count = 0;
+            $(this).parent().find("input[type='checkbox']").each(function () {
+
+                if (this.checked == false)
+                {
+                    count++;
+                }
+
+            })
+            if (count > 0) {
+                $(this).parent().siblings().find("input[type='checkbox']").each(function () {
+
+                    this.checked = false;
+
+                })
+            }
+            else {
+                $(this).parent().siblings().find("input[type='checkbox']").each(function () {
+
+                    this.checked = true;
+
+                })
+            }
+        })
+
+
+        //点击删除标签
+
+        $("#delete").click(function () {
+
+            var needID = "";
+
+            $("input[type='checkbox']").each(function (index,item) {
+
+                if ($("input[type='checkbox']")[index].checked == true)
+                {
+                    //获取选中的复选框
+                    var checkID = $(this).attr("id");
+                    needID += checkID + ",";
+                }
+
+            })
+            //截取
+            location.href = "/GoodsType/GoodsTypeDelete?needID="+needID;
+        })
+
+    })
+
+</script>

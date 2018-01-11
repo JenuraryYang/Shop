@@ -1,0 +1,388 @@
+﻿@{
+    ViewBag.Title = "Index_1";
+    Layout = "~/Views/Master_Layout.cshtml";
+
+    List<CommodityTypeInfo> CtList = ViewData["CtList"] as List<CommodityTypeInfo>;
+
+    List<StoreInfo> STlist = ViewData["Slist"] as List<StoreInfo>;
+    
+}
+@using ManagerShop
+@model List<ManagerShop.dto.ShopInfo>
+
+<style>
+
+    html{overflow-y:scroll;}
+			body{margin:0; font:12px "\5B8B\4F53",san-serif;background:#ffffff;}
+			div,ul,li{padding:0; margin:0;}
+			li{list-style-type:none;}
+			img{vertical-align:top;border:0;}
+			
+			/* box */
+			.box{width:610px;margin:100px auto;}
+			.tb-pic a{display:table-cell;text-align:center;vertical-align:middle;}
+			.tb-pic a img{vertical-align:middle;}
+			.tb-pic a{*display:block;*font-family:Arial;*line-height:1;}
+			.tb-thumb{margin:10px 0 0;overflow:hidden;}
+			.tb-thumb li{background:none repeat scroll 0 0 transparent;float:left;height:42px;margin:0 6px 0 0;overflow:hidden;padding:1px;}
+			.tb-s310, .tb-s310 a{height:80px;width:80px;}
+			.tb-s310, .tb-s310 img{max-height:200px;max-width:200px;}
+			.tb-s310 a{*font-size:271px;}
+			.tb-s40 a{*font-size:35px;}
+			.tb-s40, .tb-s40 a{height:40px;width:40px;}
+			.tb-booth{border:1px solid #CDCDCD;position:relative;z-index:1;}
+			.tb-thumb .tb-selected{background:none repeat scroll 0 0 #C30008;height:40px;padding:2px;}
+			.tb-thumb .tb-selected div{background-color:#FFFFFF;border:medium none;}
+			.tb-thumb li div{border:1px solid #CDCDCD;}
+			.zoomDiv{z-index:999;position:absolute;top:0px;left:0px;width:500px;height:500px;background:#ffffff;border:1px solid #CCCCCC;display:none;text-align:center;overflow:hidden;}
+			.zoomMask{position:absolute;background:url("images/mask.png") repeat scroll 0 0 transparent;cursor:move;z-index:1;}
+
+
+</style>
+
+<link href="~/fenye/css/page.css" rel="stylesheet" />
+
+<div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h4>商品信息的查询</h4>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="row">
+
+                            <div class="col-sm-4 m-b-xs">
+                                <select id="Mselect" class="input-sm form-control input-s-sm inline" style="height:30px;width:120px;font-size:10px">
+                                     <option value="0" >选择商品类型</option>
+                                     @{
+                                         foreach (var item in CtList)
+                                         {
+                                       <option value="@item.CTI_ID">@item.CTI_Name</option>       
+                                         } 
+                                        }
+                                </select>
+                            </div>
+
+                            <div class="col-sm-5 m-b-xs">
+                                <select class="input-sm form-control input-s-sm inline" style="height:30px;width:120px;margin-left:-200px;font-size:10px" id="Ctype">
+                                   
+                                </select>
+                            </div>
+                           @* <div class="col-sm-3">
+                                <div class="input-group">
+                                    <input type="text" placeholder="请输入关键词"  id="keyword" class="input-sm form-control"> <span class="input-group-btn">
+                                        <button type="button" id="soso" class="btn btn-sm btn-primary"> 搜索</button> </span>
+                                </div>
+                            </div>*@
+                        </div>
+                        <div class="table-responsive" style="font-size:15px">
+                            <table class="table table-striped" style="text-align:left">
+                                <thead>
+                                    <tr>
+
+                                        <th></th>
+                                        <th>商品名称</th>
+                                        <th>店铺</th>
+                                        <th>是否上架<span style="font-size:10px">(0:否,1:是)</span></th>
+                                        <th>商品类型</th>
+                                         
+                                        <th>折扣</th>
+                                        <th>折后价</th>
+                                        <th>原价</th>
+                                        <th>库存</th>
+                                        <th>操作</th>
+                                    </tr>
+            
+                                </thead>
+                                <tbody style="font-size:15px">
+                                   @{
+                                       
+                                       foreach (var item in Model)
+                                       {
+                                           
+                                            <tr id="@item.Comminfo.CI_ID">
+                                        <td>
+                                            <div class="tb-booth tb-pic tb-s310"><img src="~/Needs/img/@item.Comminfo.CI_Url" alt="放大镜展示" rel="~/Needs/img/@item.Comminfo.CI_Url" style="max-width:80px" class="jqzoom" /></div>
+                                        </td>
+
+                                                <script>
+
+                                                    $(function () {
+
+                                                        $(".jqzoom").imagezoom();
+
+                                                    })
+
+                                                </script>
+
+                                        <td style="width:250px">@item.Comminfo.CI_Name</td>
+                                         <td id="@item.Comminfo.CI_SI_ID" >@item.SI_Name</td>
+                                                     <td style="text-align:center" id="@item.Comminfo.CI_Is" >
+                                                         
+                                                         @{
+                                                           
+                                           if (item.Comminfo.CI_Is == 0)
+                                           {
+                                            @:否
+                                                         }
+                                           else
+                                           {
+                                            @:是  
+                                           }        
+                                                           }
+                                                         
+
+
+
+                                                     </td>
+                                        <td class="@item.Comminfo.CI_CTI_ID">
+                                            @item.CTI_Name
+                                        </td>
+                                           
+                                        <td>@item.Comminfo.CI_Discount</td>
+                                          <td>@item.Comminfo.CI_NowPrice</td>      
+                                        <td>@item.Comminfo.CI_Price</td>
+                                        <td>@item.Comminfo.CI_Num
+                                        </td>
+                                                
+                                                <td>
+                                                    <button class="flushbtn btn-primary dim"   type="button">更新
+                                                   </button>
+                                                    <button class="deletebtn btn-danger  dim "  type="button">删除
+                                                     </button>
+                                        </td>
+                                    </tr>
+                                           
+                                       }
+                                           
+                                   }
+                                </tbody>
+                            </table>
+                        </div>
+
+                          <div>
+                            <p id="p1"></p>
+                            <ul class="pagination" id="pagination1"></ul>
+                           @* <p id="p2"></p>
+                            <ul class="pagination" id="pagination2"></ul>*@
+                          </div>
+
+                        <div hidden="hidden" >
+
+                            <input type="text" id="allpage" value="@ViewBag.AllPage" /> <input type="text" id="nowpage"  value="@ViewBag.NowPage" />
+
+                        </div>
+
+                        <div id="divF" hidden="hidden" style="margin-top:20px;margin-left:10px" >
+
+                           <form method="post" class="formFlush" action="~/Mindex/Index_1_flush">
+
+                                <p>
+                                编号：<input type="text" name="CI_ID" readonly="true" id="goodsid" style="width:40px" />
+                                商品名称：<input type="text" name="CI_Name" id="goods" style="width:245px"/>
+                            </p>
+                            <p>
+                                商品类型： <select  name="CI_CTI_ID" style="width:100px" id="goodstype">
+                                     @{
+                                         foreach (var item in CtList)
+                                         {
+                                       <option value="@item.CTI_ID">@item.CTI_Name</option>       
+                                         } 
+                                        }
+                                </select>
+                                商品折扣：<input type="text" name="CI_Discount" id="discount"  style="width:155px" />
+                            </p>
+                               <p>
+                                   是否上架： &nbsp;<input type="radio" value="0" id="0" name="CI_Is" /><label for="0">&nbsp;&nbsp;否&nbsp;</label><input type="radio" name="CI_Is" value="1" id="1" /><label for="1">&nbsp;&nbsp;是</label>
+                                  店铺名称：<select style="width:178px" id="storename" name="CI_SI_ID" >
+                                      @{
+                                          foreach (var item in STlist)
+                                          {
+                                              <option value="@item.SI_ID">@item.SI_Name</option>
+                                          }
+                                          }
+                                       </select>
+                                    </p>
+                            <p>
+                                商品原价： <input type="text" name="CI_Price" id="price" style="width: 135px" />
+                                库存量：<input type="text" id="number" name="CI_Num"  style="width:135px"/>
+                            </p>
+
+                           </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+
+@*<script src="~/js/jquery-1.9.1.min.js"></script>*@
+@*<script src="~/fenye/js/jquery.min.js"></script>*@
+<script src="~/fenye/js/jqPaginator.js"></script>
+<script src="~/Needs/js/plugins/layer/layer.min.js"></script>
+
+<script src="~/js/jquery.imagezoom.js"></script>
+
+
+<script>
+
+
+    var allpage = $("#allpage").val();
+
+    var nowpage = $("#nowpage").val();
+
+    var type=@ViewBag.GoodsType
+
+    $(function () {
+
+        //下拉框的联动事件
+
+                                   $("#Mselect").change(function () {
+                                        
+                                       var typeid = $(this).val();
+                                       //添加子级内容
+                                       location.href = "/Mindex/Index_1?CI_CTI_ID=" + typeid;
+                                   })
+
+                                   $("#Ctype").change(function () {
+                                       var typeid = $(this).val();
+                                 
+                                       location.href = "/Mindex/Index_1?CI_CTI_ID=" + typeid;
+                                       fenye(parseInt(allpage), parseInt(nowpage), type);
+                                   })
+
+
+                                   $("#Mselect").find("option").eq(type).attr("selected", "selected");
+
+        $.ajax({
+            url: "/Mindex/SonType?CTI_ID=" + type,
+            async: false,
+            success: function (result) {
+
+                //反序列化（将json字符串转换成json对象）
+                if (result != null) {
+                    var jsonobj = JSON.parse(result);
+                    //先清空子下拉框的选项
+
+                    $("#Ctype").html();
+
+                    var content_son = "";
+
+                    for (var i = 0; i < jsonobj.length; i++) {
+                        content_son += "<option value='" + jsonobj[i].CTI_ID + "'>" + jsonobj[i].CTI_Name + "</option>"
+                    }
+                    $("#Ctype").html(content_son);
+                }
+            }
+        })
+
+
+        fenye(parseInt(allpage), parseInt(nowpage), type);
+
+        /**
+           点击搜索
+        */
+
+        $("#soso").click(function () {
+
+            var CI_Name = $("#keyword").val();
+
+
+            if (CI_Name == null || CI_Name == "")
+            {
+                alert("请输入关键字");
+                return;
+            }
+            location.href = "/Mindex/Index_1?CI_Name=" + CI_Name;
+
+        })
+
+        //点击更新
+        $(".flushbtn").click(function () {
+
+            //用户点击更新，获取哪一行的数据给 divF标签
+
+            //获取父级tr
+
+            var needtr= $(this).parent().parent();
+
+            //alert(needtr.find("td").eq(2).html());
+
+            //获取值 并 复制给divF
+            $("#goodsid").val(needtr.attr("id"));
+            $("#goods").val(needtr.find("td").eq(1).html());
+            
+
+            //处理店铺名称
+
+            var Sindex = needtr.find("td").eq(2).attr("id");
+            //绑定店铺下拉框
+            $("#storename").find("option").eq(Sindex - 1).attr("selected","selected");
+            //处理是否上架
+            var isID = needtr.find("td").eq(3).attr("id");
+            $("input[type='radio']").eq(isID).attr("checked", "checked");
+            //商品类型
+            var index = needtr.find("td").eq(4).attr("class");
+
+            $("#goodstype").find("option").eq(index-1).attr("selected","selected");
+
+            //折扣
+            $("#discount").val(needtr.find("td").eq(5).html());
+            //原价
+            $("#price").val(needtr.find("td").eq(7).html());
+            //库存
+            $("#number").val(needtr.find("td").eq(8).html());
+
+            //获取divF中的标签（复制）
+
+            var needdiv = $("#divF");
+
+            //console.log(needtr.find("td").eq(1).html());
+
+            layer.open({
+                type:1,
+                title: "商品更新数据",
+                content: needdiv,
+                area:["420px","280px"],
+                btn: ["更新", "取消"],
+                btn1: function () {
+                    $(".formFlush").submit();
+                }
+
+            })
+        })
+
+
+        //点击删除
+
+        $(".deletebtn").click(function () {
+
+            var goodsid = $(this).parent().parent().attr("id");
+
+            location.href = "/Mindex/Index_1_delete?goodsid="+goodsid;
+
+        })
+    })
+
+   
+ 
+    var fenye = function (allpage,nowpage,typeid) {
+
+        $.jqPaginator('#pagination1', {
+            totalPages: allpage,
+            visiblePages: 5,
+            currentPage: nowpage,
+            onPageChange: function (num, type) {
+
+                if (type != "init") {
+
+                    location.href = "/Mindex/Index_1?NowPage=" + num + "&CI_CTI_ID=" + typeid
+                }
+            }
+        });
+
+    }
+
+</script>
+
